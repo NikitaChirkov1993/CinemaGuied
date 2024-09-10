@@ -1,0 +1,71 @@
+@font-face {
+	font-family: 'Play';
+	src:
+		url('./fonts/PlayBold.woff2') format('woff2'),
+		url('./fonts/PlayBold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Play';
+	src:
+		url('./fonts/PlayRegular.woff2') format('woff2'),
+		url('./fonts/PlayRegular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'OpenSans';
+	src:
+		url('./fonts/OpenSansBold.woff2') format('woff2'),
+		url('./fonts/OpenSansBold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	/* Цвет */
+	--background-white: #fff;
+	--background-black: #0a0b0b;
+	--background-black-disabled: #747474;
+	--background-brand-disabled: #d6d2f1;
+	--content-secondary: rgba(255, 255, 255, 0.7);
+	--background-brand-hovered: #8577e1;
+	--content-placeholder: rgba(0, 0, 0, 0.4);
+	--content-active: #b4a9ff;
+	--background-brand-active: #6a5dc2;
+	--content-black: #000;
+	--background-secondary: #393b3c;
+	--background-disabled: rgba(255, 255, 255, 0.5);
+	--content-disabled: rgba(255, 255, 255, 0.5);
+	--content-primary: #fff;
+	/* Шрифты */
+	--font-family: "Play", sans-serif;
+	--second-family: "Open Sans", sans-serif;
+}
+
+body {
+	font-family: var(--font-family);
+	background: var(--background-black);
+	color: var(--background-white);
+}
+
+.wrapper {
+	min-height: 100vh;
+	min-width: 320px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column ;
+	padding: 20px 0;
+}
+
+.container {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
