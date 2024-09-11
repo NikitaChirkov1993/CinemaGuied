@@ -8,22 +8,10 @@
     font-size: 24px;
     line-height: 133%;
     transition: color 0.3s ease-in-out;
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 1.5px;
-        border-bottom: 1.50px solid #dc5dfc;
-        transition: all 0.3s ease-in-out;
-    }
 
     &:hover {
         color: var(--content-active);
     }
 
-    &:focus::after {
-        width: 100%;
-    }
+
 }
