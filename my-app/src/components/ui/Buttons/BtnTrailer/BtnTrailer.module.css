@@ -1,0 +1,26 @@
+.btn__trailer {
+    border-radius: 28px;
+    /* padding: 16px 48px; */
+    width: 100%;
+    /* width: 171px; */
+    height: 56px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 133%;
+    color: var(--content-primary);
+    background: var(--background-brand-active);
+
+    &:hover {
+        background: var(--background-brand-disabled);
+    }
+    &:active {
+        background: var(--background-brand-hovered);
+    }
+}
+
+/* @media only screen and (max-width:600px) {
+    .btn__wrapper {
+        flex-direction: column;
+    }
+} */

@@ -1,3 +1,4 @@
+
 .link {
   color: inherit;
   text-decoration: none;
@@ -11,7 +12,7 @@
   bottom: 0;
   width: 100%;
   height: 1.5px;
-  border-bottom: 1.5px solid #dc5dfc; /* Цвет линии под активной ссылкой */
+  border-bottom: 1.5px solid #dc5dfc;
   transition: width 0.5s ease-in-out;
 }
 

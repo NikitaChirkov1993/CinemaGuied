@@ -1,4 +1,146 @@
 .main {
-    color: aqua;
+    /* display: flex; */
     flex: 1;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.info__wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 110px;
+    z-index: 50;
+}
+
+.info__rating {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    color: var(--content-secondary);
+    margin-bottom: 16px;
+}
+
+.rating {
+    width: 70px;
+    border-radius: 16px;
+    width: 8%;
+    margin-right: 16px;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 117%;
+    color: var(--content-primary);
+    margin-bottom: 16px;
+}
+
+.description {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--content-secondary);
+    margin-bottom: 60px;
+}
+
+.btn__wrapper {
+    display: flex;
+    gap: 16px;
+}
+
+.btn__trailer {
+    width: 100%;
+}
+
+.btn__not_trailer {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.info__background {
+    position: absolute;
+    left: 470px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/imgs/filmBackground/sherlock.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 170%;
+    background-position: center;
+    width: 100%;
+    max-width: 950px;
+    height: 110%;
+    box-shadow: inset 150px 150px 150px rgba(10, 11, 11, 50);
+    margin-top: 20px;
+}
+
+.title__10film {
+    margin-top: 140px;
+    margin-bottom: 40px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 120%;
+    color: var(--content-primary);
+}
+
+@media only screen and (max-width:1024px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .description {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+
+    .rating {
+        width: 11%;
+    }
+
+    .content {
+        position: none;
+        flex-direction: column;
+    }
+
+    .info__wrapper {
+        order: 2;
+    }
+
+    .info__background {
+        position: static;
+        box-shadow: inset 50px 50px 50px rgba(10, 11, 11, 50);
+        height: 300px;
+        order: 1;
+        background-size: cover;
+        margin-bottom: 24px;
+    }
+
+    .info__wrapper {
+        margin: 0;
+    }
+
+    .title__10film {margin-top: 40px;}
+}
+
+@media only screen and (max-width:600px) {
+    .btn__wrapper {
+        flex-direction: column;
+    }
+
+    .title__10film {
+        font-size: 24px;
+    }
 }
