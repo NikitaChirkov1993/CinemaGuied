@@ -1,0 +1,33 @@
+.main {
+    flex: 1;
+}
+
+.title {
+    margin-top: 140px;
+    margin-bottom: 40px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 120%;
+    color: var(--content-primary);
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+@media only screen and (max-width:1024px) {
+    .title__10film {
+        margin-top: 40px;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .title__10film {
+        font-size: 24px;
+    }
+}

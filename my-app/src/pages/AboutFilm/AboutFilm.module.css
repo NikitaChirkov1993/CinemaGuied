@@ -1,0 +1,20 @@
+.main {
+    flex: 1;
+}
+
+.title {
+    margin-top: 140px;
+    margin-bottom: 65px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 120%;
+    color: var(--content-primary);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 130px;
+}

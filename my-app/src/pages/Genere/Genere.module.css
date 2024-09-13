@@ -1,0 +1,28 @@
+.main {
+    flex: 1;
+    margin-bottom: 160px;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 117%;
+    color: var(--content-primary);
+    margin: 65px 0;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:40px;
+}
+
+@media only screen and (max-width:600px) {
+    .title {
+        font-size: 24px;
+    }
+
+}
