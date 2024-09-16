@@ -21,7 +21,7 @@ const Footer = () => {
                             <img src="/imgs/youtube.svg" alt="" />
                         </a>
                         <a href="https://t.me/NikitaChirkovSerg" target="blank" className={style.icon}>
-                            <img src="public/imgs/telegram.svg" alt="" />
+                            <img src="/imgs/telegram.svg" alt="" />
                         </a>
                     </div>
                 </div>

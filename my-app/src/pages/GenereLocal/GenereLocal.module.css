@@ -1,0 +1,27 @@
+.main {
+    flex: 1;
+    margin-bottom: 160px;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 117%;
+    color: var(--content-primary);
+    margin: 65px 0;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 65px;
+}
+
+.btn__wrapper {
+    width: 100%;
+    max-width: 218px;
+    margin: 0 auto;
+}

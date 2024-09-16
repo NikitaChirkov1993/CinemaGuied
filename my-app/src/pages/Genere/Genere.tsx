@@ -11,11 +11,12 @@ const Genere = () => {
             <main className={style.main}>
                 <div className="container">
                     <h2 className={style.title}>Жанры фильмов</h2>
-                    <ul className={style.list}>
-                        {dataGenereFilm.map((item) => {
-                            return <GenereItem imges={item.imges} genere={item.genere} />;
-                        })}
-                    </ul>
+
+                        <ul className={style.list}>
+                            {dataGenereFilm.map((item) => {
+                                return <GenereItem imges={item.imges} genere={item.genere} />;
+                            })}
+                        </ul>
                 </div>
             </main>
             <Footer />

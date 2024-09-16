@@ -1,11 +1,11 @@
-import dataGenereFilm__1 from "./../../public/imgs/genereFilm/genereFilm__1.png";
-import dataGenereFilm__2 from "./../../public/imgs/genereFilm/genereFilm__2.png";
-import dataGenereFilm__3 from "./../../public/imgs/genereFilm/genereFilm__3.png";
-import dataGenereFilm__4 from "./../../public/imgs/genereFilm/genereFilm__4.png";
-import dataGenereFilm__5 from "./../../public/imgs/genereFilm/genereFilm__5.png";
-import dataGenereFilm__6 from "./../../public/imgs/genereFilm/genereFilm__6.png";
-import dataGenereFilm__7 from "./../../public/imgs/genereFilm/genereFilm__7.png";
-import dataGenereFilm__8 from "./../../public/imgs/genereFilm/genereFilm__8.png";
+import dataGenereFilm__1 from "/imgs/genereFilm/genereFilm__1.png";
+import dataGenereFilm__2 from "/imgs/genereFilm/genereFilm__2.png";
+import dataGenereFilm__3 from "/imgs/genereFilm/genereFilm__3.png";
+import dataGenereFilm__4 from "/imgs/genereFilm/genereFilm__4.png";
+import dataGenereFilm__5 from "/imgs/genereFilm/genereFilm__5.png";
+import dataGenereFilm__6 from "/imgs/genereFilm/genereFilm__6.png";
+import dataGenereFilm__7 from "/imgs/genereFilm/genereFilm__7.png";
+import dataGenereFilm__8 from "/imgs/genereFilm/genereFilm__8.png";
 
 
 export const dataGenereFilm = [
