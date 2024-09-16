@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import GenereLocalItem from "../../components/GenereLocalItem/GenereLocalItem";
 import Header from "../../components/Header/Header";
-import BtnTrailer from "../../components/ui/Buttons/BtnTrailer/BtnTrailer";
+import BtnBrandActive from "../../components/ui/Buttons/BtnBrandActive/BtnBrandActive";
 import { dataGenereFilm } from "../../data/dataGenereFilm";
 import style from "./GenereLocal.module.css";
 
@@ -22,7 +22,7 @@ const GenereLocal = () => {
                         })}
                     </ul>
                     <div className={style.btn__wrapper}>
-                        <BtnTrailer />
+                        <BtnBrandActive>Показать ещё</BtnBrandActive>
                     </div>
                 </div>
             </main>

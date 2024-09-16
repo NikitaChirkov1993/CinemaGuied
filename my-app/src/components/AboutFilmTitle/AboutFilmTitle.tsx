@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
+import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
 import BtnMix from "../ui/Buttons/BtnMix/BtnMix";
-import BtnTrailer from "../ui/Buttons/BtnTrailer/BtnTrailer";
 import style from "./AboutFilmTitle.module.css";
 
 const AboutFilmTitle = ({ flag } :{flag:boolean} ) => {
@@ -18,7 +18,7 @@ const AboutFilmTitle = ({ flag } :{flag:boolean} ) => {
                 {flag ? (
                     <div className={style.btn__wrapper}>
                         <div className={style.btn__trailer}>
-                            <BtnTrailer />
+                            <BtnBrandActive> Трейлер</BtnBrandActive>
                         </div>
                         <div className={style.btn__not_trailer}>
                             <NavLink to={"/aboutFilm"}>
@@ -32,7 +32,7 @@ const AboutFilmTitle = ({ flag } :{flag:boolean} ) => {
                 ) : (
                     <div className={style.btn__wrapper_2}>
                         <div className={style.btn__trailer_2}>
-                            <BtnTrailer />
+                            <BtnBrandActive>Трейлер</BtnBrandActive>
                         </div>
                         <div className={style.btn__not_trailer}>
                             <BtnFavorites />
