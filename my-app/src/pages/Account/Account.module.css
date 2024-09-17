@@ -1,0 +1,48 @@
+.main {
+    flex: 1;
+    margin-bottom: 160px;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 117%;
+    color: var(--content-primary);
+    margin: 65px 0;
+}
+
+.userControl {
+    display: flex;
+    gap: 65px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--background-white);
+}
+
+.mobile {
+    display: none;
+}
+
+@media only screen and (max-width:620px) {
+    .title {
+        font-size: 24px;
+        line-height: 133%;
+        margin: 40px 0;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .userControl {
+        gap: 5px;
+        font-size: 20px;
+    }
+}

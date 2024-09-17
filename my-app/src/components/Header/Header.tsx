@@ -15,20 +15,19 @@ const Header = () => {
                     </NavLink>
 
                     <nav className={style.menu__desktop}>
-                        <NavLink
-                            className={({ isActive}) => isActive ? `${style.link} ${style.active}` : style.link}
-                            to={"/"}>
+                        <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/"}>
                             <BtnMenu>Главная</BtnMenu>
                         </NavLink>
 
-                        <NavLink
-                            className={({ isActive }) => isActive ? `${style.link} ${style.active}` : style.link}
-                            to={"/genere"}>
+                        <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/genere"}>
                             <BtnMenu>Жанры</BtnMenu>
                         </NavLink>
 
                         <InputMenu />
-                        <BtnMenu>Войти</BtnMenu>
+                        <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
+                            <BtnMenu>Никита</BtnMenu>
+                            {/* <BtnMenu>Войти</BtnMenu> */}
+                        </NavLink>
                     </nav>
                     <nav className={style.menu__mobile}>
                         <NavLink className={style.link} to={"/genere"}>
@@ -40,9 +39,12 @@ const Header = () => {
                         <div className={style.icon}>
                             <img src="/imgs/searchmenu.svg" alt="Поиск" />
                         </div>
-                        <div className={style.icon}>
-                            <img src="/imgs/user.svg" alt="" />
-                        </div>
+                        <NavLink className={style.link}  to={"/account"}>
+                            <div className={style.icon}>
+                                <img src="/imgs/user.svg" alt="Войти" />
+                            </div>
+                        </NavLink>
+
                         {/* <InputMenu  /> */}
                     </nav>
                 </div>
