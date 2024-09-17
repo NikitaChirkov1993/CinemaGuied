@@ -1,0 +1,18 @@
+.item {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    width: 224px;
+    height: 336px;
+    box-shadow: 0 0 80px 0 rgba(255, 255, 255, 0.33);
+    cursor: pointer;
+    object-fit: contain;
+    object-position: center;
+    overflow: hidden;
+}
+
+.item img {
+    width: 100%; /* Изображение займет всю ширину контейнера */
+    height: 100%; /* Изображение займет всю высоту контейнера */
+    object-fit: cover; /* Масштабирование изображения для заполнения контейнера */
+    object-position: center; /* Центрирование изображения в контейнере */
+}

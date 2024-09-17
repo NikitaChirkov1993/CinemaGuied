@@ -20,11 +20,37 @@
     font-size: 24px;
     line-height: 133%;
     color: var(--background-white);
+    margin-bottom: 65px;
 }
 
 .mobile {
     display: none;
 }
+
+.link {
+    position: relative;
+  }
+
+  .link.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 1.5px;
+    border-bottom: 1.5px solid #dc5dfc;
+    transition: width 0.5s ease-in-out;
+  }
+
+  .list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 40px;
+    row-gap: 65px;
+
+  }
 
 @media only screen and (max-width:620px) {
     .title {
