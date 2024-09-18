@@ -2,11 +2,15 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import BtnMenu from "../ui/Buttons/BtnMenu/BtnMenu";
 import InputMenu from "../ui/Inputs/InputMenu/InputMenu";
-import ModalAuth from "../ui/Modal/ModalAuth/ModalAuth";
+import ModalLogin from "../ui/Modal/ModalLogin/ModalLogin";
+import ModalRegister from "../ui/Modal/ModalRegister/ModalRegister";
+import ModalRegitserOK from "../ui/Modal/ModalRegitserOK/ModalRegitserOK";
 import style from "./Header.module.css";
 
 const Header = () => {
-    const [visibleModal, setVisibleModal] = useState(false);
+    const [modalLogin, setModalLogin] = useState(false);
+    const [modalRegister, setModalRegister] = useState(false);
+    const [modalRegisterOK, setModalRegisterOK] = useState(false);
     return (
         <header className={style.header}>
             <div className="container">
@@ -30,10 +34,29 @@ const Header = () => {
                         {/* <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
                             <BtnMenu>Никита</BtnMenu>
                         </NavLink> */}
-                        <BtnMenu onClick={() => setVisibleModal(true)}>Войти</BtnMenu>
-                        <ModalAuth visible={visibleModal} setVisible={setVisibleModal}>
-                            asd
-                        </ModalAuth>
+                        <BtnMenu onClick={() => setModalLogin(true)}>Войти</BtnMenu>
+
+                        <ModalLogin modalLogin={modalLogin} setModalLogin={setModalLogin}>
+                            <button onClick={() => {
+                                setModalRegister(true);
+                                setModalLogin(false);
+                            } }>Войти</button>
+                        </ModalLogin>
+
+                        <ModalRegister modalRegister={modalRegister} setModalRegister={setModalRegister}>
+                            <button onClick={() => {
+                                setModalRegister(false);
+                                setModalRegisterOK(true);
+                            }}>Регистраия</button>
+                        </ModalRegister>
+
+                        <ModalRegitserOK modalRegisterOK={modalRegisterOK} setModalRegisterOK={setModalRegisterOK} >
+                            <button onClick={() => {
+                                setModalRegisterOK(false);
+                                setModalLogin(true);
+                            }}>ОК</button>
+                        </ModalRegitserOK>
+
                     </nav>
                     <nav className={style.menu__mobile}>
                         <NavLink className={style.link} to={"/genere"}>
@@ -50,27 +73,33 @@ const Header = () => {
                                 <img src="/imgs/user.svg" alt="Войти" />
                             </div>
                         </NavLink> */}
-                        <ModalAuth visible={visibleModal} setVisible={setVisibleModal}>
-                            asd
-                        </ModalAuth>
+                        <ModalLogin modalLogin={modalLogin} setModalLogin={setModalLogin}>
+                            <button onClick={() => {
+                                setModalRegister(true);
+                                setModalLogin(false);
+                            } }>Войти</button>
+                        </ModalLogin>
+
+                        <ModalRegister modalRegister={modalRegister} setModalRegister={setModalRegister}>
+                            <button onClick={() => {
+                                setModalRegister(false);
+                                setModalRegisterOK(true);
+                            }}>Регистраия</button>
+                        </ModalRegister>
+
+                        <ModalRegitserOK modalRegisterOK={modalRegisterOK} setModalRegisterOK={setModalRegisterOK} >
+                            <button onClick={() => {
+                                setModalRegisterOK(false);
+                                setModalLogin(true);
+                            }}>ОК</button>
+                        </ModalRegitserOK>
                         <div onClick={() => {
-                            setVisibleModal(true);
+                            setModalLogin(true);
                             console.log("sdljkfklsdklfdjskl");
 
                         }} className={style.icon}>
                             <img src="/imgs/user.svg" alt="Войти" />
                         </div>
-
-                        {/* <div onClick={()=> setVisibleModal(true)}  className={style.icon}>
-                            <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.917 13C12.441 15.8377 9.973 18 7 18C3.68629 18 1 15.3137 1 12C1 8.68629 3.68629 6 7 6C9.973 6 12.441 8.16229 12.917 11H23V13H21V17H19V13H17V17H15V13H12.917ZM7 16C9.20914 16 11 14.2091 11 12C11 9.79086 9.20914 8 7 8C4.79086 8 3 9.79086 3 12C3 14.2091 4.79086 16 7 16Z"
-                                    fill="white"
-                                />
-                            </svg>
-                        </div> */}
-
-                        {/* <InputMenu  /> */}
                     </nav>
                 </div>
             </div>

@@ -1,12 +1,12 @@
-import style from "./ModalAuth.module.css";
+import style from "./ModalLogin.module.css";
 
-const ModalAuth = ({ children, visible, setVisible }) => {
+const ModalLogin = ({ children, modalLogin, setModalLogin }) => {
     const rootClasses = [style.myModal];
-    if (visible) {
+    if (modalLogin) {
         rootClasses.push(style.active)
     }
     return (
-        <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
+        <div className={rootClasses.join(" ")} onClick={() => setModalLogin(false)}>
             <div className={style.myModalContent} onClick={(e) => e.stopPropagation() }>
                 {children}
             </div>
@@ -14,4 +14,4 @@ const ModalAuth = ({ children, visible, setVisible }) => {
      );
 }
 
-export default ModalAuth;
+export default ModalLogin;
