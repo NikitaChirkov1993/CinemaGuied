@@ -1,18 +1,38 @@
 .item {
+    position: relative;
+}
+
+.wrapper {
     border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 16px;
-    width: 224px;
+    max-width: 224px;
     height: 336px;
     box-shadow: 0 0 80px 0 rgba(255, 255, 255, 0.33);
     cursor: pointer;
-    object-fit: contain;
-    object-position: center;
+    border-radius: 16px;
     overflow: hidden;
 }
 
-.item img {
-    width: 100%; /* Изображение займет всю ширину контейнера */
-    height: 100%; /* Изображение займет всю высоту контейнера */
-    object-fit: cover; /* Масштабирование изображения для заполнения контейнера */
-    object-position: center; /* Центрирование изображения в контейнере */
+.imges {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+
+
+}
+
+.icon__delete {
+    position: absolute;
+    /* z-index: 50; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -10px; /* Выпирает за границу контейнера */
+    top: -10px;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    background: var(--content-secondary);
+    transition: opacity 0.3s ease-in-out;
 }

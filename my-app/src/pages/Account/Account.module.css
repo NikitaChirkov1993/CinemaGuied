@@ -15,11 +15,6 @@
 .userControl {
     display: flex;
     gap: 65px;
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 133%;
-    color: var(--background-white);
     margin-bottom: 65px;
 }
 
@@ -29,9 +24,9 @@
 
 .link {
     position: relative;
-  }
+}
 
-  .link.active::after {
+.link.active::after {
     content: "";
     position: absolute;
     left: 0;
@@ -40,23 +35,73 @@
     height: 1.5px;
     border-bottom: 1.5px solid #dc5dfc;
     transition: width 0.5s ease-in-out;
-  }
+}
 
-  .list {
+.list__favorites {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     column-gap: 40px;
     row-gap: 65px;
+}
 
-  }
+.list__settings {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+.item__settings {
+    display: flex;
+    align-items:center;
+    max-width: 500px;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background: var(--background-disabled);
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--content-primary);
+    margin-right: 16px;
+}
+
+.info__name {
+    font-family: var(--font-family);
+    line-height: 133%;
+    color: var(--content-primary);
+}
+
+.info__title {
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.info__text {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.btn__wrapper {
+    max-width: 260px;
+}
 
 @media only screen and (max-width:620px) {
     .title {
         font-size: 24px;
         line-height: 133%;
         margin: 40px 0;
+        text-align: center;
     }
 
     .desktop {
@@ -68,7 +113,27 @@
     }
 
     .userControl {
-        gap: 5px;
-        font-size: 20px;
+        gap: 24px;
+        justify-content: center;
+    }
+
+    .list__favorites {
+        justify-content: center;
+    }
+
+    /* .avatar {
+        width: 40px;
+
+    } */
+
+    .info__title {
+        font-weight: 400;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .info__text {
+        font-weight: 700;
+        font-size: 18px;
     }
 }

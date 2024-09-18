@@ -13,7 +13,7 @@
 
 @media only screen and (max-width:620px) {
     .btn {
-
         column-gap: 2px;
+        font-size: 18px;
     }
 }
