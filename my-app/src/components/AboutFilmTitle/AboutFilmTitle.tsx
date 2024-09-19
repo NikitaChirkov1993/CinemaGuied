@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
 import BtnMix from "../ui/Buttons/BtnMix/BtnMix";
+import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmTitle.module.css";
 
-const AboutFilmTitle = ({ flag } :{flag:boolean} ) => {
+const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
+    const [modalTrailer, setModalTrailer] = useState(false);
     return (
         <div className={style.content}>
             <div className={style.info__wrapper}>
@@ -15,11 +18,20 @@ const AboutFilmTitle = ({ flag } :{flag:boolean} ) => {
                 </div>
                 <h2 className={style.title}>Шерлок Холмс и доктор Ватсон: Знакомство</h2>
                 <p className={style.description}>Увлекательные приключения самого известного сыщика всех времен</p>
+                <ModalTrailer modalTrailer={modalTrailer} setModalTrailer={setModalTrailer}>
+                    <iframe
+                        className={style.video}
+                        src="https://www.youtube.com/embed/7sy1-jinveo">
+                        dsf
+                    </iframe>
+                </ModalTrailer>
                 {flag ? (
                     <div className={style.btn__wrapper}>
                         <div className={style.btn__trailer}>
-                            <BtnBrandActive> Трейлер</BtnBrandActive>
+                            <BtnBrandActive onClick={() => setModalTrailer(true)}>      Трейлер
+                            </BtnBrandActive>
                         </div>
+
                         <div className={style.btn__not_trailer}>
                             <NavLink to={"/aboutFilm"}>
                                 <BtnAboutFilm />
@@ -32,7 +44,7 @@ const AboutFilmTitle = ({ flag } :{flag:boolean} ) => {
                 ) : (
                     <div className={style.btn__wrapper_2}>
                         <div className={style.btn__trailer_2}>
-                            <BtnBrandActive>Трейлер</BtnBrandActive>
+                            <BtnBrandActive onClick={() => setModalTrailer(true)}>Трейлер</BtnBrandActive>
                         </div>
                         <div className={style.btn__not_trailer}>
                             <BtnFavorites />
