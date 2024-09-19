@@ -1,8 +1,8 @@
 import style from "./BtnBrandActive.module.css";
 
-const BtnBrandActive = ({children}) => {
+const BtnBrandActive = ({children, ...props}) => {
     return (
-        <button className={style.btn__trailer}>
+        <button {...props} className={style.btn__trailer}>
             {children}
         </button>
      );

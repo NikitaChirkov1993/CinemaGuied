@@ -1,0 +1,29 @@
+.auth {
+    display: flex;
+    border: 1px solid var(--content-placeholder);
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    height: 56px;
+}
+
+.img__auth {
+    margin-right: 14px;
+}
+
+.input__auth {
+    width: 100%;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    color: var(--content-placeholder);
+}
+
+@media only screen and (max-width:1024px) {
+    .img__auth {
+        margin-right: 8px;
+    }
+
+
+  }
