@@ -4,6 +4,7 @@ import login from "./../../public/imgs/authIcon/login.svg";
 import loginError from "./../../public/imgs/authIcon/loginError.svg";
 import nameSurname from "./../../public/imgs/authIcon/nameSurname.svg";
 import nameSurnameError from "./../../public/imgs/authIcon/nameSurnameError.svg";
+import close from "./../../public/imgs/delete.svg";
 
 
 
@@ -13,6 +14,7 @@ export const dataAuth = [
         img: email,
         imgError: emailError,
         placeholder: "Электронная почта",
+        imgClose:close,
     },
     {
         id: 2,
