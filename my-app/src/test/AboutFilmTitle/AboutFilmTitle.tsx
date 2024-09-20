@@ -19,6 +19,14 @@ const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
                 <h2 className={style.title}>Шерлок Холмс и доктор Ватсон: Знакомство</h2>
                 <p className={style.description}>Увлекательные приключения самого известного сыщика всех времен</p>
                 <ModalTrailer modalTrailer={modalTrailer} setModalTrailer={setModalTrailer}/>
+                    {/* <iframe
+                        // id="youtubeVideo"
+                        className={style.video}
+                        src="https://www.youtube.com/embed/7sy1-jinveo" allow="autoplay; encrypted-media"
+                        allowFullScreen>
+
+                    </iframe> */}
+                {/* </ModalTrailer> */}
                 {flag ? (
                     <div className={style.btn__wrapper}>
                         <div className={style.btn__trailer}>

@@ -36,9 +36,8 @@ const ModalTrailer = ({ modalTrailer, setModalTrailer,  }) => {
                     src={modalTrailer ? videoSrc : ""}
                     allow="autoplay; encrypted-media"
                     allowFullScreen
-                >
-                </iframe>
-
+                ></iframe>
+                {/* {children} */}
             </div>
         </div>
     );
