@@ -30,6 +30,10 @@
     margin-right: 16px;
 }
 
+.info {
+    display: flex;
+}
+
 .title {
     font-family: var(--font-family);
     font-weight: 700;
@@ -78,7 +82,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    background-image: url("/imgs/filmBackground/sherlock.png");
+    /* background-image: url("/imgs/filmBackground/sherlock.png"); */
     background-repeat: no-repeat;
     background-size: cover;
     height: 170%;

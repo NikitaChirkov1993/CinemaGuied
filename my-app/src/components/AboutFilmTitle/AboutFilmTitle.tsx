@@ -11,19 +11,44 @@ import style from "./AboutFilmTitle.module.css";
 const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
     const [modalTrailer, setModalTrailer] = useState(false);
 
-    const { data, isLoading } = useMovieRandomQuery();
-    console.log(data,"data");
+    const { data, isLoading,error,refetch } = useMovieRandomQuery();
+    console.log(data, "data");
+    if (isLoading) {
+        return <div>Loading...</div>; // Можно отобразить индикатор загрузки
+    }
+    if (error) {
+        return <div>Error: {error.message}</div>; // Обработка ошибок
+    }
+
+    if (!data) {
+        return <div>No data available</div>; // Если данные все еще недоступны
+    }
+
+    const handleMovieMix = () => {
+       refetch()
+    }
 
     return (
         <div className={style.content}>
             <div className={style.info__wrapper}>
                 <div className={style.info__rating}>
-                    <img className={style.rating} src="/imgs/rating7.5.svg" alt="" />
-                    <p className={style.info}>1979 детектив 1 ч 7 мин</p>
+                    <img className={style.rating} src="/imgs/rating7.5.svg" alt="рейтинг" />
+                    <p className={style.info}>
+                        <p>{data.releaseYear} year,&nbsp; </p>
+
+                        {data.genres.map((item) =>
+                            <p>&nbsp;{ item} - </p>
+                        )}
+                        {data.runtime} min.</p>
                 </div>
-                <h2 className={style.title}>Шерлок Холмс и доктор Ватсон: Знакомство</h2>
-                <p className={style.description}>Увлекательные приключения самого известного сыщика всех времен</p>
-                <ModalTrailer modalTrailer={modalTrailer} setModalTrailer={setModalTrailer}/>
+                <h2 className={style.title}>{ data.title}</h2>
+                <p className={style.description}>{ data.plot}</p>
+                <ModalTrailer
+                    movie={data.trailerYouTubeId
+                    }
+                    modalTrailer={modalTrailer}
+                    setModalTrailer={setModalTrailer}
+                />
                 {flag ? (
                     <div className={style.btn__wrapper}>
                         <div className={style.btn__trailer}>
@@ -36,7 +61,7 @@ const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
                             </NavLink>
 
                             <BtnFavorites />
-                            <BtnMix />
+                            <BtnMix onClick={handleMovieMix} />
                         </div>
                     </div>
                 ) : (
@@ -51,7 +76,11 @@ const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
                 )}
             </div>
 
-            <div className={style.info__background}></div>
+            <div
+                className={style.info__background}
+                style={{ backgroundImage: `url(${data.backdropUrl})` }}
+            >
+            </div>
         </div>
     );
 };

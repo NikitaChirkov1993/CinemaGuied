@@ -1,8 +1,8 @@
 import style from "./BtnMix.module.css";
 
-const BtnMix = () => {
+const BtnMix = ({onClick}) => {
     return (
-        <button className={style.mix}>
+        <button onClick={ onClick} className={style.mix}>
             <img src="/imgs/mix.svg" alt="Перемешать" />
         </button>
     );

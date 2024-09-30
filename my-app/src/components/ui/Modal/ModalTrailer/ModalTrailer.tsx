@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import style from "./ModalTrailer.module.css";
 
-const ModalTrailer = ({ modalTrailer, setModalTrailer,  }) => {
+const ModalTrailer = ({ modalTrailer, setModalTrailer,movie  }) => {
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
-    const videoSrc = "https://www.youtube.com/embed/7sy1-jinveo?enablejsapi=1"; // Исходная ссылка на видео
+    const videoSrc = `https://www.youtube.com/embed/${movie}?enablejsapi=1`; // Исходная ссылка на видео
 
     const handleClose = () => {
         setModalTrailer(false);
