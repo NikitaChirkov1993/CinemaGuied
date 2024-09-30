@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useMovieRandomQuery } from "../../redux/cinemaGuideApi";
 import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
@@ -9,6 +10,10 @@ import style from "./AboutFilmTitle.module.css";
 
 const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
     const [modalTrailer, setModalTrailer] = useState(false);
+
+    const { data, isLoading } = useMovieRandomQuery();
+    console.log(data,"data");
+
     return (
         <div className={style.content}>
             <div className={style.info__wrapper}>

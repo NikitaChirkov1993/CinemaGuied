@@ -17,6 +17,7 @@ const AboutFilm = () => {
                         {dataAboutFilm.map((item) => {
                             return (
                                 <AboutFilmItem
+                                    key={new Date().toISOString()}
                                     title={item.title}
                                     value={item.value}
                                 />
