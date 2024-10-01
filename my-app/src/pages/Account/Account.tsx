@@ -48,7 +48,7 @@ const Account = () => {
                                     <p className={style.avatar__text}>НЧ</p>
                                 </div>
                                 <div className={style.info__name}>
-                                    <p className={style.info__title}>Имя Фмаилия</p>
+                                    <p className={style.info__title}>Имя Фамилия</p>
                                     <p className={style.info__text}>Никита Чирков</p>
                                 </div>
                             </li>

@@ -2,7 +2,7 @@ export interface Movie {
     keywords: string[];
     backdropUrl: string;
     production: string;
-    trailerYoutubeId: string;
+    trailerYouTubeId: string;
     language: string;
     tmdbRating: number;
     title: string;
@@ -19,10 +19,13 @@ export interface Movie {
     awardsSummary: string;
     runtime: number;
     trailerUrl: string;
-    relaseYear: number;
+    releaseYear: number;
     countriesOfOrigin: string[];
     originalTitle: string;
     searchL: string;
     homepage: string;
     status: string;
-  }
+}
+export interface MovieId {
+    id: number;
+}

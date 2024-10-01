@@ -4,8 +4,11 @@
     align-items: center;
     border: 1px solid var(--content-placeholder);
     border-radius: 28px;
-    /* padding: 16px 48px; */
     width: 68px;
     height: 56px;
     background: #333;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        background: var(--background-black-disabled);
+    }
 }

@@ -14,6 +14,7 @@
 .info__rating {
     display: flex;
     justify-content: flex-start;
+
     align-items: center;
     font-family: var(--font-family);
     font-weight: 400;
@@ -21,17 +22,26 @@
     line-height: 133%;
     color: var(--content-secondary);
     margin-bottom: 16px;
+    gap: 16px   ;
 }
 
 .rating {
-    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+    padding: 5px;
+    min-width: 80px;
     border-radius: 16px;
-    width: 8%;
-    margin-right: 16px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 133%;
+    color: var(--content-primary);
 }
 
 .info {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .title {
@@ -56,6 +66,7 @@
     display: flex;
     gap: 16px;
 }
+
 .btn__wrapper_2 {
     display: flex;
     gap: 16px;
@@ -82,7 +93,6 @@
     top: 0;
     right: 0;
     bottom: 0;
-    /* background-image: url("/imgs/filmBackground/sherlock.png"); */
     background-repeat: no-repeat;
     background-size: cover;
     height: 170%;
@@ -102,10 +112,6 @@
     .description {
         font-size: 18px;
         margin-bottom: 32px;
-    }
-
-    .rating {
-        width: 11%;
     }
 
     .content {
@@ -135,4 +141,9 @@
     .btn__wrapper {
         flex-direction: column;
     }
+
+    .info {
+        flex-direction: column;
+    }
+
 }
