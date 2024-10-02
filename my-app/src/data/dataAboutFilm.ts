@@ -1,25 +1,27 @@
-export const dataAboutFilm =[
-    {
+
+
+export const dataAboutFilm = [
+    {   id:1,
         title:"Язык оригинала",
         value:"Русский",
     },
-    {
+    {   id:2,
         title:"Бюджет",
         value:"250 000 руб.",
     },
-    {
+    {   id:3,
         title:"Выручка",
         value:"2 835 000 руб.",
     },
-    {
+    {   id:4,
         title:"Режиссёр",
         value:"Игорь Масленников",
     },
-    {
+    {   id:5,
         title:"Продакшен",
         value:"Ленфильм",
     },
-    {
+    {   id:6,
         title:"Награды",
         value:"Топ-250, 33 место",
     },

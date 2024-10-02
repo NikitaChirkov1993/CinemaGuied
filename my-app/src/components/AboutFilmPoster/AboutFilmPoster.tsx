@@ -1,32 +1,13 @@
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useMovieIdQuery } from "../../api/cinemaGuideApi";
 import { toggleModal } from "../../redux/modalTrailerSlice";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
-import Loading from "../ui/Loading/Loading";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmPoster.module.css";
 
-const AboutFilmPoster = () => {
+const AboutFilmPoster = ({ data }) => {
     const dispatch = useDispatch();
 
-    const { id } = useParams<{ id: string }>();
-    const movieId = Number(id);
-
-    const { data, isFetching, error } = useMovieIdQuery(movieId);
-
-    if (isFetching) {
-        return <Loading />; // Можно отобразить индикатор загрузки
-    }
-    if (error) {
-        return <div>Error: {error.message}</div>;
-        // Обработка ошибок
-    }
-
-    if (!data) {
-        return <div>No data available</div>; // Если данные все еще недоступны
-    }
     // Логика определения цвета рейтинга
     const getRatingColor = (rating: number) => {
         if (rating >= 0 && rating <= 4.2) return "#c82020";
