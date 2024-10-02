@@ -1,5 +1,5 @@
 import { useMovieTop10Query } from "../../api/cinemaGuideApi";
-import AboutFilmTitle from "../../components/AboutFilmTitle/AboutFilmTitle";
+import AboutFilmPosterRandom from "../../components/AboutFilmPoster/AboutFilmPosterRandom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Top10FilmItem from "../../components/Top10FilmItem/Top10FilmItem";
@@ -26,7 +26,7 @@ const Home = () => {
             <Header />
             <main className={style.main}>
                 <div className="container">
-                    <AboutFilmTitle flag={true} />
+                    <AboutFilmPosterRandom />
                     <h3 className={style.title}>Топ 10 фильмов</h3>
                     <ul className={style.list}>
                         {data.map((item) => {

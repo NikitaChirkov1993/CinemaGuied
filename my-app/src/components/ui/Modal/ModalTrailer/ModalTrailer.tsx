@@ -1,12 +1,17 @@
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal, selectModalTrailer } from "../../../../redux/modalTrailerSlice";
 import style from "./ModalTrailer.module.css";
 
-const ModalTrailer = ({ modalTrailer, setModalTrailer,movie  }) => {
+const ModalTrailer = ({ movie  }) => {
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
     const videoSrc = `https://www.youtube.com/embed/${movie}?enablejsapi=1`; // Исходная ссылка на видео
 
+    const dispatch = useDispatch();
+    const isModalOpen = useSelector(selectModalTrailer);
+
     const handleClose = () => {
-        setModalTrailer(false);
+        dispatch(closeModal());
         if (iframeRef.current) {
             iframeRef.current.src = ""; // Останавливаем видео
         }
@@ -19,7 +24,7 @@ const ModalTrailer = ({ modalTrailer, setModalTrailer,movie  }) => {
     };
 
     const rootClasses = [style.myModal];
-    if (modalTrailer) {
+    if (isModalOpen) {
         rootClasses.push(style.active);
         handleOpen(); // Устанавливаем src, когда модальное окно открывается
     }
@@ -33,7 +38,7 @@ const ModalTrailer = ({ modalTrailer, setModalTrailer,movie  }) => {
                 <iframe
                     ref={iframeRef}
                     className={style.video}
-                    src={modalTrailer ? videoSrc : ""}
+                    src={isModalOpen ? videoSrc : ""}
                     allow="autoplay; encrypted-media"
                     allowFullScreen
                 >

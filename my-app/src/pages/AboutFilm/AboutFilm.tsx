@@ -1,5 +1,5 @@
 import AboutFilmItem from "../../components/AboutFilmItem/AboutFilmItem";
-import AboutFilmTitle from "../../components/AboutFilmTitle/AboutFilmTitle";
+import AboutFilmPoster from "../../components/AboutFilmPoster/AboutFilmPoster";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import { dataAboutFilm } from "../../data/dataAboutFilm";
@@ -11,7 +11,7 @@ const AboutFilm = () => {
             <Header />
             <main className={style.main}>
                 <div className="container">
-                    <AboutFilmTitle flag={false} />
+                    <AboutFilmPoster/>
                     <h3 className={style.title}>О фильме</h3>
                     <ul className={style.list}>
                         {dataAboutFilm.map((item) => {

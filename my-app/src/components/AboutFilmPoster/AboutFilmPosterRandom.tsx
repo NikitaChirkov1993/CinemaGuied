@@ -1,37 +1,22 @@
-import { useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import { useMovieIdQuery, useMovieRandomQuery } from "../../api/cinemaGuideApi";
+import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { useMovieRandomQuery } from "../../api/cinemaGuideApi";
+import { toggleModal } from "../../redux/modalTrailerSlice";
 import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
 import BtnMix from "../ui/Buttons/BtnMix/BtnMix";
 import Loading from "../ui/Loading/Loading";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
-import style from "./AboutFilmTitle.module.css";
+import style from "./AboutFilmPoster.module.css";
 
-const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
-    const [modalTrailer, setModalTrailer] = useState(false);
-    const { id } = useParams<{ id: string }>();
-    const movieId = Number(id);
+const AboutFilmPosterRandom = () => {
 
-    const { data: randomMovieData, refetch: refetchrandomMovie, isLoading: isLoadingRandom, error: errorRandom } = useMovieRandomQuery();
-    console.log(randomMovieData, "randomMovieData");
+    const dispatch = useDispatch();
 
-    const { data, isFetching, error } = useMovieIdQuery(movieId);
+    const { data, refetch, isFetching, error} = useMovieRandomQuery();
 
-    // console.log(data, "data");
-    if (isLoadingRandom) {
-        return <Loading />; // Можно отобразить индикатор загрузки
-    }
 
-    if (!randomMovieData) {
-        return <div>No data available2323232</div>; // Если данные все еще недоступны
-    }
-
-    if (errorRandom) {
-        return <div>Error: {error.message}</div>;
-        // Обработка ошибок
-    }
 
     if (isFetching) {
         return <Loading />; // Можно отобразить индикатор загрузки
@@ -53,41 +38,42 @@ const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
         return "black"; // значение по умолчанию, если вдруг рейтинг вне ожидаемых границ
     };
 
-    const ratingColor = getRatingColor(randomMovieData.tmdbRating);
+    const ratingColor = getRatingColor(data.tmdbRating);
 
     const handleMovieMix = () => {
-        refetchrandomMovie();
+        refetch();
     };
 
     return (
         <div className={style.content}>
             <div className={style.info__wrapper}>
-                <h2 className={style.title}>{randomMovieData?.title}</h2>
-                <p className={style.description}>{randomMovieData?.plot}</p>
-                <ModalTrailer movie={randomMovieData?.trailerYouTubeId} modalTrailer={modalTrailer} setModalTrailer={setModalTrailer} />
-                <div className={style.info__rating}>
+            <div className={style.info__rating}>
                     <div className={style.rating} style={{ backgroundColor: ratingColor }}>
                         <img className={style.rating__star} src="/imgs/starRaiting.svg" alt="рейтинг" />
-                        <div className={style.rating__number}>{randomMovieData.tmdbRating}</div>
+                        <div className={style.rating__number}>{data.tmdbRating}</div>
                     </div>
 
                     <div className={style.info}>
-                        <span>{randomMovieData?.releaseYear} year&nbsp; </span>
+                        <span>{data?.releaseYear} year&nbsp; </span>
                         <div>
-                            {randomMovieData?.genres.map((item, index) => (
+                            {data?.genres.map((item, index) => (
                                 <span key={index}>({item})</span>
                             ))}
                         </div>
-                        <div>&nbsp;{randomMovieData?.runtime} min</div>
+                        <div>&nbsp;{data?.runtime} min</div>
                     </div>
                 </div>
+                <h2 className={style.title}>{data?.title}</h2>
+                <p className={style.description}>{data?.plot}</p>
+                <ModalTrailer movie={data?.trailerYouTubeId}  />
+
                 <div className={style.btn__wrapper}>
                     <div className={style.btn__trailer}>
-                        <BtnBrandActive onClick={() => setModalTrailer(true)}> Трейлер</BtnBrandActive>
+                        <BtnBrandActive onClick={() => dispatch(toggleModal())}> Трейлер</BtnBrandActive>
                     </div>
 
                     <div className={style.btn__not_trailer}>
-                        <NavLink to={`/aboutFilm/${randomMovieData?.id}`}>
+                        <NavLink to={`/aboutFilm/${data?.id}`}>
                             <BtnAboutFilm />
                         </NavLink>
 
@@ -96,9 +82,9 @@ const AboutFilmTitle = ({ flag }: { flag: boolean }) => {
                     </div>
                 </div>
             </div>
-            <div className={style.info__background} style={{ backgroundImage: `url(${randomMovieData?.backdropUrl})` }}></div>
+            <div className={style.info__background} style={{ backgroundImage: `url(${data?.backdropUrl})` }}></div>
         </div>
     );
-};
+}
 
-export default AboutFilmTitle;
+export default AboutFilmPosterRandom;
