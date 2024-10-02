@@ -2,8 +2,10 @@ import { NavLink } from "react-router-dom";
 import style from "./GenereLocalItem.module.css";
 
 const GenereLocalItem = ({ imges, id }) => {
+
+
     return (
-        <NavLink className={style.link} to={"/aboutFilm"}>
+        <NavLink className={style.link} to={`/aboutFilm/${id}`}>
             <li className={style.item}>
                 <img className={style.imges} src={imges} alt="" />
             </li>

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Movie } from "../types/types";
+import { Movie, MovieQueryParams } from "../types/types";
 
 export const cinemaGuideApi = createApi({
     reducerPath: "cinemaGuideApi",
@@ -17,7 +17,24 @@ export const cinemaGuideApi = createApi({
         movieId: build.query<Movie,number>({
             query: (movieId) => `/movie/${movieId}`,
         }),
+        movieGenere: build.query<[],void>({
+            query: () => "/movie/genres",
+        }),
+        movie: build.query<Movie[],MovieQueryParams>({
+            query: ({ count = 50, page = 1, title, genre }) => {
+                // Создаем параметры строки запроса
+        const params = new URLSearchParams();
+
+        // Добавляем параметры в строку запроса, если они переданы
+        if (count) params.append('count', count.toString());
+        if (page) params.append('page', page.toString());
+        if (title) params.append('title', title);
+        if (genre) params.append('genre', genre);
+
+        return `/movie?${params.toString()}`; // Возвращаем запрос с параметрами
+            },
+        }),
     })
 });
 
-export const { useMovieRandomQuery,useMovieTop10Query,useMovieIdQuery, } = cinemaGuideApi;
+export const { useMovieRandomQuery,useMovieTop10Query,useMovieIdQuery,useMovieGenereQuery,useMovieQuery } = cinemaGuideApi;

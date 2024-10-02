@@ -1,14 +1,15 @@
 import { NavLink } from "react-router-dom";
 import style from "./GenereItem.module.css";
 
-const GenereItem = ({ imges, genere }) => {
+const GenereItem = ({ genere }) => {
+
     return (
-        <li className={style.item}>
-            <NavLink to={`/genere/${genere}`}>
-                <img className={style.imges} src={imges} alt="" />
+        <NavLink className={style.link} to={`/genere/${genere}`}>
+            <li className={style.item}>
+                {/* <img className={style.imges} src="./../../../public/imgs/no.png" alt="" /> */}
                 <p className={style.text}>{genere}</p>
-            </NavLink>
-        </li>
+            </li>
+        </NavLink>
     );
 };
 

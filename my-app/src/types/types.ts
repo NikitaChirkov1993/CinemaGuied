@@ -29,3 +29,10 @@ export interface Movie {
 export interface MovieId {
     id: number;
 }
+
+export interface MovieQueryParams {
+    count?: number;
+    page?: number;
+    title?: string;
+    genre?: string;
+}
