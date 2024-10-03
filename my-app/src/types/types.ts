@@ -36,3 +36,16 @@ export interface MovieQueryParams {
     title?: string;
     genre?: string;
 }
+
+export interface ResponseUserRegister {
+    result?: boolean;
+    error?: string
+}
+export interface BodyUserRegister {
+
+        email: string,
+        password: string,
+        name: string,
+        surname: string,
+
+}

@@ -8,14 +8,13 @@ import Loading from "../../components/ui/Loading/Loading";
 import style from "./GenereFilm.module.css";
 
 const GenereFilm = () => {
-    const [count, setСount] = useState(10);
-    const [page, setPage] = useState(1); // Текущая страница
-    const [hasMore, setHasMore] = useState(true); // Состояние для отслеживания, есть ли еще фильмы
+    // const [count, setСount] = useState(10);
+    const [page, setPage] = useState<number>(0); // Текущая страница
 
     const { genere } = useParams();
+    console.log(page, "page");
 
     const { data, isLoading, refetch, error } = useMovieQuery({
-        count: 50,
         page: page,
         genre: genere,
     });
@@ -30,16 +29,14 @@ const GenereFilm = () => {
         return <div>No data available</div>; // Если данные все еще недоступны
     }
 
-    const More10Movie = () => {
+    const plusPage = () => {
         setPage((prevPage) => prevPage + 1);
-        // setСount((prevCount) => prevCount + 10); // Увеличиваем количество
-        // console.log(count,"count");
-
         refetch(); // Перезапрашиваем данные
-        if (count === 50) {
-            setHasMore(false);
-            return;
-        }
+    };
+
+    const minusPage = () => {
+        setPage((prevPage) => prevPage - 1);
+        refetch();
     };
 
     return (
@@ -53,19 +50,19 @@ const GenereFilm = () => {
                             return (
                                 <NavLink key={item.id} className={style.link} to={`/aboutFilm/${item.id}`}>
                                     <li className={style.item}>
-                                        {item.posterUrl ?
+                                        {item.posterUrl ? (
                                             <img className={style.imges} src={item.posterUrl} alt="Афиша" />
-                                            :
+                                        ) : (
                                             <img className={style.item__img} src="./../../../public/imgs/no.png" alt="filmNO" />
-                                            }
+                                        )}
                                     </li>
                                 </NavLink>
-
                             );
                         })}
                     </ul>
                     <div className={style.btn__wrapper}>
-                        {hasMore && <BtnBrandActive onClick={More10Movie}>Показать ещё</BtnBrandActive>}
+                        {page > 0 && <BtnBrandActive onClick={minusPage}>Назад</BtnBrandActive>}
+                        <BtnBrandActive onClick={plusPage}>Показать ещё</BtnBrandActive>
                     </div>
                 </div>
             </main>

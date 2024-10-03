@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Movie, MovieQueryParams } from "../types/types";
+import { BodyUserRegister, Movie, MovieQueryParams, ResponseUserRegister } from "../types/types";
 
 export const cinemaGuideApi = createApi({
     reducerPath: "cinemaGuideApi",
@@ -20,7 +20,7 @@ export const cinemaGuideApi = createApi({
             query: () => "/movie/genres",
         }),
         movie: build.query<Movie[], MovieQueryParams>({
-            query: ({ count = 50, page = 1, title, genre }) => {
+            query: ({ count=50 , page , title, genre }) => {
                 // Создаем параметры строки запроса
                 const params = new URLSearchParams();
 
@@ -33,6 +33,14 @@ export const cinemaGuideApi = createApi({
                 return `/movie?${params.toString()}`; // Возвращаем запрос с параметрами
             },
         }),
+        userRegister: build.mutation<ResponseUserRegister,BodyUserRegister>({
+            query: (body) => ({
+                url: "/user",
+                method: "POST",
+                body,
+            })
+        })
+
     }),
 });
 
@@ -41,4 +49,6 @@ export const {
     useMovieTop10Query,
     useMovieIdQuery,
     useMovieGenereQuery,
-    useMovieQuery } = cinemaGuideApi;
+    useMovieQuery,
+    useUserRegisterMutation,
+} = cinemaGuideApi;

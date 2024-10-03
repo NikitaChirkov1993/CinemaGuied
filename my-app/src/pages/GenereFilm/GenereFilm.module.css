@@ -21,8 +21,10 @@
 }
 
 .btn__wrapper {
+    display: flex;
+    gap: 10px;
     width: 100%;
-    max-width: 218px;
+    max-width: 300px;
     margin: 0 auto;
 }
 
