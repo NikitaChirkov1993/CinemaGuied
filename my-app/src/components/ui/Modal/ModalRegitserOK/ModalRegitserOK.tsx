@@ -1,14 +1,20 @@
+import { useDispatch, useSelector } from "react-redux";
 import { dataAuth } from "../../../../data/dataAuth";
+import { openModalLogin } from "../../../../redux/modalLoginSlice";
+import { closeModalRegisterOk, selectModalRegisterOk } from "../../../../redux/modalRegisterOkSlice";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
 import style from "./ModalRegitserOK.module.css";
 
-const ModalRegitserOK = ({ setModalLogin, modalRegisterOK, setModalRegisterOK }) => {
+const ModalRegitserOK = () => {
+    const dispatch = useDispatch();
+    const isModalRegisterOk = useSelector(selectModalRegisterOk);
+
     const rootClasses = [style.myModal];
-    if (modalRegisterOK) {
+    if (isModalRegisterOk) {
         rootClasses.push(style.active);
     }
     return (
-        <div className={rootClasses.join(" ")} onClick={() => setModalRegisterOK(false)}>
+        <div className={rootClasses.join(" ")} onClick={() => dispatch(closeModalRegisterOk())}>
             <div className={style.myModalContent} onClick={(e) => e.stopPropagation()}>
                 <div className={style.auth__wrapper}>
                     <img className={style.auth__logo} src="/imgs/logo.svg" alt="Логотип" />
@@ -16,15 +22,15 @@ const ModalRegitserOK = ({ setModalLogin, modalRegisterOK, setModalRegisterOK })
                     <p className={style.registerOK__text}>Используйте вашу электронную почту для входа</p>
                     <BtnBrandActive
                         onClick={() => {
-                            setModalRegisterOK(false);
-                            setModalLogin(true);
+                            dispatch(closeModalRegisterOk());
+                            dispatch(openModalLogin());
                         }}>
                         Войти
                     </BtnBrandActive>
                 </div>
                 <img
                     onClick={() => {
-                        setModalRegisterOK(false);
+                        dispatch(closeModalRegisterOk());
                     }}
                     className={style.imges__close}
                     src={dataAuth[0].imgClose}

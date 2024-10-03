@@ -30,7 +30,7 @@ const Home = () => {
                     <ul className={style.list}>
                         {data.map((item) => {
                             return (
-                                <li className={style.item}>
+                                <li key={item.id} className={style.item}>
                                     <NavLink to={`/aboutFilm/${item.id}`}>
                                         {item.posterUrl ? (
                                             <img className={style.item__img} src={item.posterUrl} alt="film" />

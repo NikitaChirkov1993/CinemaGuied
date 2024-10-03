@@ -39,13 +39,12 @@ export interface MovieQueryParams {
 
 export interface ResponseUserRegister {
     result?: boolean;
-    error?: string
+    error?: string;
 }
 export interface BodyUserRegister {
-
-        email: string,
-        password: string,
-        name: string,
-        surname: string,
-
+    email: string;
+    password: string;
+    name: string;
+    surname: string;
+    passwordRepeat?: "" ;
 }

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { openModalLogin } from "../../redux/modalLoginSlice";
 import BtnMenu from "../ui/Buttons/BtnMenu/BtnMenu";
 import InputMenu from "../ui/Inputs/InputMenu/InputMenu";
 import ModalLogin from "../ui/Modal/ModalLogin/ModalLogin";
@@ -8,9 +9,8 @@ import ModalRegitserOK from "../ui/Modal/ModalRegitserOK/ModalRegitserOK";
 import style from "./Header.module.css";
 
 const Header = () => {
-    const [modalLogin, setModalLogin] = useState(false);
-    const [modalRegister, setModalRegister] = useState(false);
-    const [modalRegisterOK, setModalRegisterOK] = useState(false);
+
+    const dispatch = useDispatch();
     return (
         <header className={style.header}>
             <div className="container">
@@ -34,26 +34,13 @@ const Header = () => {
                         {/* <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
                             <BtnMenu>Никита</BtnMenu>
                         </NavLink> */}
-                        <BtnMenu onClick={() => setModalLogin(true)}>Войти</BtnMenu>
+                        <BtnMenu onClick={() => dispatch(openModalLogin())}>Войти</BtnMenu>
 
-                        <ModalLogin
-                            modalLogin={modalLogin}
-                            setModalLogin={setModalLogin}
-                            setModalRegister={setModalRegister}
-                        />
+                        <ModalLogin/>
 
-                        <ModalRegister
-                            modalRegister={modalRegister}
-                            setModalRegister={setModalRegister}
-                            setModalLogin={setModalLogin}
-                            setModalRegisterOK={setModalRegisterOK}
-                        />
+                        <ModalRegister/>
 
-                        <ModalRegitserOK
-                            modalRegisterOK={modalRegisterOK}
-                            setModalRegisterOK={setModalRegisterOK}
-                            setModalLogin={setModalLogin}
-                        />
+                        <ModalRegitserOK/>
 
                     </nav>
                     <nav className={style.menu__mobile}>
@@ -71,28 +58,14 @@ const Header = () => {
                                 <img src="/imgs/user.svg" alt="Войти" />
                             </div>
                         </NavLink> */}
-                         <ModalLogin
-                            modalLogin={modalLogin}
-                            setModalLogin={setModalLogin}
-                            setModalRegister={setModalRegister}
-                        />
+                         <ModalLogin/>
 
-                        <ModalRegister
-                            modalRegister={modalRegister}
-                            setModalRegister={setModalRegister}
-                            setModalLogin={setModalLogin}
-                            setModalRegisterOK={setModalRegisterOK}
-                        />
+                        <ModalRegister/>
 
-                        <ModalRegitserOK
-                            modalRegisterOK={modalRegisterOK}
-                            setModalRegisterOK={setModalRegisterOK}
-                            setModalLogin={setModalLogin}
-                        />
+                        <ModalRegitserOK/>
                         <div
                             onClick={() => {
-                                setModalLogin(true);
-                                console.log("sdljkfklsdklfdjskl");
+                                dispatch(openModalLogin());
                             }}
                             className={style.icon}>
                             <img src="/imgs/user.svg" alt="Войти" />
