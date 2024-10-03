@@ -7,34 +7,38 @@ export const cinemaGuideApi = createApi({
         baseUrl: "https://cinemaguide.skillbox.cc/",
     }),
     endpoints: (build) => ({
-        movieRandom: build.query<Movie,void>({
+        movieRandom: build.query<Movie, void>({
             query: () => "/movie/random",
-
         }),
-        movieTop10: build.query<Movie[],void>({
+        movieTop10: build.query<Movie[], void>({
             query: () => "/movie/top10",
         }),
-        movieId: build.query<Movie,number>({
+        movieId: build.query<Movie, number>({
             query: (movieId) => `/movie/${movieId}`,
         }),
-        movieGenere: build.query<[],void>({
+        movieGenere: build.query<[], void>({
             query: () => "/movie/genres",
         }),
-        movie: build.query<Movie[],MovieQueryParams>({
+        movie: build.query<Movie[], MovieQueryParams>({
             query: ({ count = 50, page = 1, title, genre }) => {
                 // Создаем параметры строки запроса
-        const params = new URLSearchParams();
+                const params = new URLSearchParams();
 
-        // Добавляем параметры в строку запроса, если они переданы
-        if (count) params.append('count', count.toString());
-        if (page) params.append('page', page.toString());
-        if (title) params.append('title', title);
-        if (genre) params.append('genre', genre);
+                // Добавляем параметры в строку запроса, если они переданы
+                if (count) params.append("count", count.toString());
+                if (page) params.append("page", page.toString());
+                if (title) params.append("title", title);
+                if (genre) params.append("genre", genre);
 
-        return `/movie?${params.toString()}`; // Возвращаем запрос с параметрами
+                return `/movie?${params.toString()}`; // Возвращаем запрос с параметрами
             },
         }),
-    })
+    }),
 });
 
-export const { useMovieRandomQuery,useMovieTop10Query,useMovieIdQuery,useMovieGenereQuery,useMovieQuery } = cinemaGuideApi;
+export const {
+    useMovieRandomQuery,
+    useMovieTop10Query,
+    useMovieIdQuery,
+    useMovieGenereQuery,
+    useMovieQuery } = cinemaGuideApi;

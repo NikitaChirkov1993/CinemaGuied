@@ -1,16 +1,16 @@
+import { NavLink } from "react-router-dom";
 import { useMovieTop10Query } from "../../api/cinemaGuideApi";
 import AboutFilmPosterRandom from "../../components/AboutFilmPoster/AboutFilmPosterRandom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import Top10FilmItem from "../../components/Top10FilmItem/Top10FilmItem";
 import Loading from "../../components/ui/Loading/Loading";
 import style from "./Home.module.css";
 
 const Home = () => {
-    const { data, isFetching, error,} = useMovieTop10Query();
+    const { data, isFetching, error } = useMovieTop10Query();
     console.log(data);
     if (isFetching) {
-        return <Loading/>; // Можно отобразить индикатор загрузки
+        return <Loading />; // Можно отобразить индикатор загрузки
     }
     if (error) {
         return <div>Error: {error.message}</div>; // Обработка ошибок
@@ -19,7 +19,6 @@ const Home = () => {
     if (!data) {
         return <div>No data available</div>; // Если данные все еще недоступны
     }
-
 
     return (
         <div className="wrapper">
@@ -30,7 +29,17 @@ const Home = () => {
                     <h3 className={style.title}>Топ 10 фильмов</h3>
                     <ul className={style.list}>
                         {data.map((item) => {
-                            return <Top10FilmItem id={item.id} key={item.id} imges={item.posterUrl} />;
+                            return (
+                                <li className={style.item}>
+                                    <NavLink to={`/aboutFilm/${item.id}`}>
+                                        {item.posterUrl ? (
+                                            <img className={style.item__img} src={item.posterUrl} alt="film" />
+                                        ) : (
+                                            <img className={style.item__img} src="./../../../public/imgs/no3.webp" alt="filmNO" />
+                                        )}
+                                    </NavLink>
+                                </li>
+                            );
                         })}
                     </ul>
                 </div>

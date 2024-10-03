@@ -1,28 +1,26 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useMovieQuery } from "../../api/cinemaGuideApi";
 import Footer from "../../components/Footer/Footer";
-import GenereLocalItem from "../../components/GenereLocalItem/GenereLocalItem";
 import Header from "../../components/Header/Header";
 import BtnBrandActive from "../../components/ui/Buttons/BtnBrandActive/BtnBrandActive";
 import Loading from "../../components/ui/Loading/Loading";
-import style from "./GenereLocal.module.css";
+import style from "./GenereFilm.module.css";
 
-const GenereLocal = () => {
+const GenereFilm = () => {
     const [count, setСount] = useState(10);
     const [page, setPage] = useState(1); // Текущая страница
     const [hasMore, setHasMore] = useState(true); // Состояние для отслеживания, есть ли еще фильмы
-
 
     const { genere } = useParams();
 
     const { data, isLoading, refetch, error } = useMovieQuery({
         count: 50,
-        page: page ,
+        page: page,
         genre: genere,
     });
     if (isLoading) {
-        return <Loading/>; // Можно отобразить индикатор загрузки
+        return <Loading />; // Можно отобразить индикатор загрузки
     }
     if (error) {
         return <div>Error: {error.message}</div>; // Обработка ошибок
@@ -44,8 +42,6 @@ const GenereLocal = () => {
         }
     };
 
-
-
     return (
         <div className="wrapper">
             <Header />
@@ -54,12 +50,22 @@ const GenereLocal = () => {
                     <h2 className={style.title}>{genere ? genere : "Content not found"}</h2>
                     <ul className={style.list}>
                         {data.map((item) => {
-                            return <GenereLocalItem key={item.id} imges={item.posterUrl} id={item.id} />;
+                            return (
+                                <NavLink key={item.id} className={style.link} to={`/aboutFilm/${item.id}`}>
+                                    <li className={style.item}>
+                                        {item.posterUrl ?
+                                            <img className={style.imges} src={item.posterUrl} alt="Афиша" />
+                                            :
+                                            <img className={style.item__img} src="./../../../public/imgs/no.png" alt="filmNO" />
+                                            }
+                                    </li>
+                                </NavLink>
+
+                            );
                         })}
                     </ul>
                     <div className={style.btn__wrapper}>
-                        {hasMore && <BtnBrandActive onClick={More10Movie} >Показать ещё</BtnBrandActive>}
-
+                        {hasMore && <BtnBrandActive onClick={More10Movie}>Показать ещё</BtnBrandActive>}
                     </div>
                 </div>
             </main>
@@ -68,4 +74,4 @@ const GenereLocal = () => {
     );
 };
 
-export default GenereLocal;
+export default GenereFilm;
