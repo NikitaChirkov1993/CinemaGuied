@@ -21,8 +21,8 @@ const ModalLogin = () => {
                 <div className={style.auth__wrapper}>
                     <img className={style.auth__logo} src="/imgs/logo.svg" alt="Логотип" />
                     <div className={style.authInput__wrapper}>
-                        <InputAuth img={dataAuth[0].img} placeholder={dataAuth[0].placeholder} />
-                        <InputAuth img={dataAuth[2].img} placeholder={dataAuth[2].placeholder1} />
+                        <InputAuth img={dataAuth.imgEmail} placeholder={dataAuth.placeholderEmail} />
+                        <InputAuth img={dataAuth.imgPass} placeholder={dataAuth.placeholderPass} />
                     </div>
                     <NavLink  className={style.auth__link} to={"/account"}>
                         <BtnBrandActive onClick={()=> dispatch(closeModalLogin())}>Войти</BtnBrandActive>
@@ -40,7 +40,7 @@ const ModalLogin = () => {
                             dispatch(closeModalLogin());
                         }}
                         className={style.imges__close}
-                        src={dataAuth[0].imgClose} alt="Закрыть"
+                        src="/imgs/delete.svg" alt="Закрыть"
                     />
                 </div>
             </div>

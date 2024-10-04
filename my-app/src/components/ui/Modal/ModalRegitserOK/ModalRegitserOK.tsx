@@ -33,7 +33,7 @@ const ModalRegitserOK = () => {
                         dispatch(closeModalRegisterOk());
                     }}
                     className={style.imges__close}
-                    src={dataAuth[0].imgClose}
+                    src="/imgs/delete.svg"
                     alt="Закрыть"
                 />
             </div>

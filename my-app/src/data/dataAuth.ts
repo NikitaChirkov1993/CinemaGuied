@@ -1,34 +1,108 @@
-import email from "./../../public/imgs/authIcon/email.svg";
-import emailError from "./../../public/imgs/authIcon/emailError.svg";
-import login from "./../../public/imgs/authIcon/login.svg";
-import loginError from "./../../public/imgs/authIcon/loginError.svg";
-import nameSurname from "./../../public/imgs/authIcon/nameSurname.svg";
-import nameSurnameError from "./../../public/imgs/authIcon/nameSurnameError.svg";
-import close from "./../../public/imgs/delete.svg";
+import email from "/imgs/authIcon/email.svg";
+import login from "/imgs/authIcon/login.svg";
+import nameSurname from "/imgs/authIcon/nameSurname.svg";
 
 
 
-export const dataAuth = [
-    {
-        id: 1,
-        img: email,
-        imgError: emailError,
-        placeholder: "Электронная почта",
-        imgClose:close,
-    },
-    {
-        id: 2,
-        img: nameSurname,
-        imgError: nameSurnameError,
-        placeholder1: "Имя",
-        placeholder2: "Фамилия",
-    },
-    {
-        id: 3,
-        img: login,
-        imgError: loginError,
-        placeholder1: "Пароль",
-        placeholder2: "Подтвердить пароль",
-    },
+// export const dataAuth = [
+//     {
+//         id: 1,
+//         img: email,
+//         placeholder: "Электронная почта",
+//         imgClose:close,
+//     },
+//     {
+//         id: 2,
+//         img: nameSurname,
+//         placeholder1: "Имя",
+//         placeholder2: "Фамилия",
+//     },
+//     {
+//         id: 3,
+//         img: login,
+//         placeholder1: "Пароль",
+//         placeholder2: "Подтвердить пароль",
+//     },
 
-]
+// ]
+export const dataAuth = {
+    imgEmail: email,
+    imgNameSurnume: nameSurname,
+    imgPass: login,
+    placeholderEmail:"Электронная почта",
+    placeholderName: "Имя",
+    placeholderSurnume: "Фамилия",
+    placeholderPass: "Пароль",
+    placeholderPassRepeat: "Подтвердить пароль",
+}
+
+
+// <InputAuth
+//                             auth={isRegister.email}
+//                             setAuth={setIsRegister}
+//                             isName="email"
+//                             img={dataAuth.imgEmail}
+//                             placeholder={dataAuth.placeholderEmail}
+//                             setErrorMassage={setErrorMassage}
+//                             flagError={flagError}
+//                             setFlagError={setFlagError}
+//                             type="text"
+//                             flagPass={flagPass}
+//                             setFlagPass={setFlagPass}
+//                         />
+
+//                         <InputAuth
+//                             auth={isRegister.name}
+//                             setAuth={setIsRegister}
+//                             isName="name"
+//                             img={dataAuth.imgNameSurnume}
+//                             placeholder={dataAuth.placeholderName}
+//                             setErrorMassage={setErrorMassage}
+//                             flagError={flagError}
+//                             setFlagError={setFlagError}
+//                             type="text"
+//                             flagPass={flagPass}
+//                             setFlagPass={setFlagPass}
+//                         />
+
+//                         <InputAuth
+//                             auth={isRegister.surname}
+//                             setAuth={setIsRegister}
+//                             isName="surname"
+//                             img={dataAuth.imgNameSurnume}
+//                             placeholder={dataAuth.placeholderSurnume}
+//                             setErrorMassage={setErrorMassage}
+//                             flagError={flagError}
+//                             setFlagError={setFlagError}
+//                             type="text"
+//                             flagPass={flagPass}
+//                             setFlagPass={setFlagPass}
+//                         />
+
+//                         <InputAuth
+//                             auth={isRegister.password}
+//                             setAuth={setIsRegister}
+//                             isName="password"
+//                             img={dataAuth.imgPass}
+//                             placeholder={dataAuth.placeholderPass}
+//                             setErrorMassage={setErrorMassage}
+//                             flagError={flagError}
+//                             setFlagError={setFlagError}
+//                             type="password"
+//                             flagPass={flagPass}
+//                             setFlagPass={setFlagPass}
+//                         />
+
+//                         <InputAuth
+//                             auth={isRegister.passwordRepeat}
+//                             setAuth={setIsRegister}
+//                             isName="passwordRepeat"
+//                             img={dataAuth.imgPass}
+//                             placeholder={dataAuth.placeholderPassRepeat}
+//                             setErrorMassage={setErrorMassage}
+//                             flagError={flagError}
+//                             setFlagError={setFlagError}
+//                             type="password"
+//                             flagPass={flagPass}
+//                             setFlagPass={setFlagPass}
+//                         />

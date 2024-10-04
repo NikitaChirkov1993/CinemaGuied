@@ -3,17 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { useUserRegisterMutation } from "../../../../api/cinemaGuideApi";
 import { dataAuth } from "../../../../data/dataAuth";
 import { openModalLogin } from "../../../../redux/modalLoginSlice";
+import { openModalRegisterOk } from "../../../../redux/modalRegisterOkSlice";
 import { closeModalRegister, selectModalRegister } from "../../../../redux/modalRegisterSlice";
 import { BodyUserRegister } from "../../../../types/types";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
 import InputAuth from "../../Inputs/InputAuth/InputAuth";
+import Loading from "../../Loading/Loading";
 import style from "./ModalRegister.module.css";
 
 const ModalRegister = () => {
-    const [errorMassage, setErrorMassage] = useState({
-        massagePassword: "",
-        massageUser:"Такой пользователь уже есть"
-    })
+    const dispatch = useDispatch();
+    const isModalRegister = useSelector(selectModalRegister);
+    const [userRegister, { isLoading, isSuccess }] = useUserRegisterMutation();
+
+    const [errorMassage, setErrorMassage] = useState<{ errorMassage: string ,flagGlobal:boolean,flagPass:boolean,flagEmail:boolean }>({
+        errorMassage: "",
+        flagGlobal: false,
+        flagPass: false,
+        flagEmail:false,
+    });
+
+    const [flagError, setFlagError] = useState<boolean>(false);
+    const [flagPass, setFlagPass] = useState<boolean>(false);
+    const [flagEmail, setFlagEmail] = useState<boolean>(false);
 
     const [isRegister, setIsRegister] = useState<BodyUserRegister>({
         email: "",
@@ -23,40 +35,71 @@ const ModalRegister = () => {
         passwordRepeat: "",
     });
 
-    const [userRegister, { isError, isSuccess, error }] = useUserRegisterMutation();
-    if (isSuccess) {
-        console.log("Всё прошло успешно аккаунт создан!");
-    }
-    if (isError) {
-        console.log("Пороли не совподают!");
-    }
-
-
-
-    const handleuserRegister = async () => {
-        if (isRegister.password !== isRegister.passwordRepeat) {
-            setErrorMassage((prev) => ({
-                ...prev,
-                massagePassword: "Пороли не совподают"
-            }));
-        }
-
-        // if (userRegister) {
-        //     await userRegister(isRegister).unwrap();
-        //     dispatch(closeModalRegister());
-        //     dispatch(openModalRegisterOk());
-        // }
-
+    const validateEmail = (email:string) => {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailPattern.test(email);
     };
 
+    const handleuserRegister = async () => {
+        if (Object.values(isRegister).some((field) => !field.length)) {
+            setErrorMassage({ errorMassage: "Все поля должны быть заполненны" });
+            setFlagError(true);
+        } else if (isRegister.password !== isRegister.passwordRepeat) {
+            setErrorMassage({ errorMassage: "Пароли не совпадают" });
+            setFlagPass(true);
+        }else if (isRegister.password.length < 5) {
+            setErrorMassage({ errorMassage: "Пароль не может быть меньше 5 символов" });
+            setFlagPass(true);
+        }else if ( !validateEmail(isRegister.email)) {
+            setErrorMassage({ errorMassage: "Некорректный email. Пожалуйста, введите email в формате email@gmail.com." });
+            setFlagEmail(true);
+        } else {
+            try {
+                // await userRegister(isRegister).unwrap();
+                dispatch(closeModalRegister());
+                dispatch(openModalRegisterOk());
+            } catch (error) {
+                console.log(error);
+                setErrorMassage({ errorMassage: "Такой пользователь уже существует" });
+                setFlagError(true);
+                setIsRegister({
+                    email: "",
+                    name: "",
+                    surname: "",
+                    password: "",
+                    passwordRepeat: "",
+                });
 
-    const dispatch = useDispatch();
-    const isModalRegister = useSelector(selectModalRegister);
+            }
+        }
+    };
+
+    // useEffect(() => {
+    //     if (isSuccess) {
+    //         dispatch(closeModalRegister());
+    //         dispatch(openModalRegisterOk());
+    //         setIsRegister({
+    //             email: "",
+    //             name: "",
+    //             surname: "",
+    //             password: "",
+    //             passwordRepeat: "",
+    //         });
+    //         setErrorMassage({ errorMassage: "" });
+    //         setFlagError(false);
+    //         setFlagPass(false);
+    //     }
+    // }, [isSuccess, dispatch]);
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     const rootClasses = [style.myModal];
     if (isModalRegister) {
         rootClasses.push(style.active);
     }
+
     return (
         <div className={rootClasses.join(" ")} onClick={() => dispatch(closeModalRegister())}>
             <div className={style.myModalContent} onClick={(e) => e.stopPropagation()}>
@@ -64,26 +107,81 @@ const ModalRegister = () => {
                     <img className={style.auth__logo} src="/imgs/logo.svg" alt="Логотип" />
                     <h3 className={style.regitser__title}>Регистрация</h3>
                     <div className={style.authInput__wrapper}>
-                        {error && <span className={style.massage}>Такой пользователь уже существует</span>}
-                        {errorMassage.massagePassword && <span className={style.massage}>{ errorMassage.massagePassword}</span>}
-                        <InputAuth auth={isRegister.email} setAuth={setIsRegister} isName={"email"} img={dataAuth[0].img} placeholder={dataAuth[0].placeholder} />
-                        <InputAuth auth={isRegister.name} setAuth={setIsRegister} isName={"name"} img={dataAuth[1].img} placeholder={dataAuth[1].placeholder1} />
-                        <InputAuth auth={isRegister.surname} setAuth={setIsRegister} isName={"surname"} img={dataAuth[1].img} placeholder={dataAuth[1].placeholder2} />
-                        <InputAuth auth={isRegister.password} setAuth={setIsRegister} isName={"password"} img={dataAuth[2].img} placeholder={dataAuth[2].placeholder1} />
+                        {errorMassage.errorMassage && <span className={style.massage}>{errorMassage.errorMassage}</span>}
+
+                        <InputAuth
+                            auth={isRegister.email}
+                            setAuth={setIsRegister}
+                            isName="email"
+                            img={dataAuth.imgEmail}
+                            placeholder={dataAuth.placeholderEmail}
+                            setErrorMassage={setErrorMassage}
+                            flagError={flagError}
+                            setFlagError={setFlagError}
+                            type="email"
+                            flagPass={flagPass}
+                            setFlagPass={setFlagPass}
+                        />
+
+                        <InputAuth
+                            auth={isRegister.name}
+                            setAuth={setIsRegister}
+                            isName="name"
+                            img={dataAuth.imgNameSurnume}
+                            placeholder={dataAuth.placeholderName}
+                            setErrorMassage={setErrorMassage}
+                            flagError={flagError}
+                            setFlagError={setFlagError}
+                            type="text"
+                            flagPass={flagPass}
+                            setFlagPass={setFlagPass}
+                        />
+
+                        <InputAuth
+                            auth={isRegister.surname}
+                            setAuth={setIsRegister}
+                            isName="surname"
+                            img={dataAuth.imgNameSurnume}
+                            placeholder={dataAuth.placeholderSurnume}
+                            setErrorMassage={setErrorMassage}
+                            flagError={flagError}
+                            setFlagError={setFlagError}
+                            type="text"
+                            flagPass={flagPass}
+                            setFlagPass={setFlagPass}
+                        />
+
+                        <InputAuth
+                            auth={isRegister.password}
+                            setAuth={setIsRegister}
+                            isName="password"
+                            img={dataAuth.imgPass}
+                            placeholder={dataAuth.placeholderPass}
+                            setErrorMassage={setErrorMassage}
+                            flagError={flagError}
+                            setFlagError={setFlagError}
+                            type="password"
+                            flagPass={flagPass}
+                            setFlagPass={setFlagPass}
+                        />
+
                         <InputAuth
                             auth={isRegister.passwordRepeat}
                             setAuth={setIsRegister}
-                            isName={"passwordRepeat"}
-                            img={dataAuth[2].img}
-                            placeholder={dataAuth[2].placeholder2}
+                            isName="passwordRepeat"
+                            img={dataAuth.imgPass}
+                            placeholder={dataAuth.placeholderPassRepeat}
+                            setErrorMassage={setErrorMassage}
+                            flagError={flagError}
+                            setFlagError={setFlagError}
+                            type="password"
+                            flagPass={flagPass}
+                            setFlagPass={setFlagPass}
                         />
                     </div>
                     <BtnBrandActive
-                        onClick={() => {
-                            {
-                                handleuserRegister();
-                            }
-                        }}>
+                        onClick={handleuserRegister}
+                    >
                         Создать аккаунт
                     </BtnBrandActive>
                     <div
@@ -96,11 +194,9 @@ const ModalRegister = () => {
                     </div>
                 </div>
                 <img
-                    onClick={() => {
-                        dispatch(closeModalRegister());
-                    }}
+                    onClick={() => dispatch(closeModalRegister())}
                     className={style.imges__close}
-                    src={dataAuth[0].imgClose}
+                    src="/imgs/delete.svg"
                     alt="Закрыть"
                 />
             </div>

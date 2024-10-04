@@ -5,6 +5,21 @@
     padding: 16px;
     width: 100%;
     height: 56px;
+    &:focus {
+        box-shadow: 0 0 5px 2px rgba(29, 187, 8, 0.5); /* Тень при фокусе */
+        outline: none; /* Убираем стандартное обрамление */
+    }
+
+}
+.auth.active {
+    border: 1px solid #ff7575;
+}
+.auth.activeFocus {
+    box-shadow: 0 0 5px 2px rgba(108, 230, 92, 0.5); /* Тень при фокусе */
+    outline: none; /* Убираем стандартное обрамление */
+}
+.auth.activePass {
+    border: 1px solid #ff7575;
 }
 
 .img__auth {
@@ -18,11 +33,10 @@
     font-size: 18px;
     line-height: 133%;
     color: var(--content-placeholder);
+    transition: box-shadow 0.3s ease;
 }
 
-.svg_1 {
-    color: #ff7575;
-}
+
 
 @media only screen and (max-width:1024px) {
     .img__auth {

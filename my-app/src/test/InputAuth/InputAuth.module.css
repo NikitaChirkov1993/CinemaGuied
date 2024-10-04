@@ -1,0 +1,44 @@
+.auth {
+    display: flex;
+    border: 1px solid var(--content-placeholder);
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    height: 56px;
+}
+
+.img__auth {
+    margin-right: 14px;
+}
+
+.input__auth {
+      width: 100%;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    color: var(--content-placeholder);
+}
+
+.auth.error {
+    border-color: #ff7575;
+}
+
+.input__auth_error {
+    color: #ff7575;
+}
+
+.img__auth_error {
+    filter: brightness(0) saturate(100%) invert(20%) sepia(80%) saturate(7475%) hue-rotate(0deg) brightness(97%) contrast(126%);
+}
+
+
+
+
+@media only screen and (max-width:1024px) {
+    .img__auth {
+        margin-right: 8px;
+    }
+
+
+  }
