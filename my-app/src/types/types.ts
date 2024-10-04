@@ -48,17 +48,27 @@ export interface BodyUserRegister {
     surname: string;
     passwordRepeat?: "" ;
 }
+export interface IerrorMassage {
+    errorMassage: string;
+    flagGlobal: boolean;
+    flagPass: boolean;
+    flagEmail: boolean;
+}
+
+
 
 export interface InputAuthProps {
     img: string;
     placeholder: string;
+    type: string;
+    isName: string;
     auth?: string;
     setAuth: React.Dispatch<React.SetStateAction<BodyUserRegister>>;
-    isName: string;
-    setErrorMassage: React.Dispatch<React.SetStateAction<{ errorMassage: string }>>;
-    flagError: boolean;
-    setFlagError: React.Dispatch<React.SetStateAction<boolean>>;
-    type: string;
-    flagPass: boolean;
-    setFlagPass: React.Dispatch<React.SetStateAction<boolean>>;
+    errorMassage: IerrorMassage;
+    setErrorMassage: React.Dispatch<React.SetStateAction<IerrorMassage>>;
+    // setErrorMassage: React.Dispatch<React.SetStateAction<{ errorMassage: string }>>;
+    // flagError: boolean;
+    // setFlagError: React.Dispatch<React.SetStateAction<boolean>>;
+    // flagPass: boolean;
+    // setFlagPass: React.Dispatch<React.SetStateAction<boolean>>;
   }

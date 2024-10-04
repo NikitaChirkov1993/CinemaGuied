@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUserRegisterMutation } from "../../../../api/cinemaGuideApi";
 import { dataAuth } from "../../../../data/dataAuth";
 import { openModalLogin } from "../../../../redux/modalLoginSlice";
 import { openModalRegisterOk } from "../../../../redux/modalRegisterOkSlice";
 import { closeModalRegister, selectModalRegister } from "../../../../redux/modalRegisterSlice";
-import { BodyUserRegister } from "../../../../types/types";
+import { BodyUserRegister, IerrorMassage } from "../../../../types/types";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
 import InputAuth from "../../Inputs/InputAuth/InputAuth";
 import Loading from "../../Loading/Loading";
@@ -16,7 +16,7 @@ const ModalRegister = () => {
     const isModalRegister = useSelector(selectModalRegister);
     const [userRegister, { isLoading, isSuccess }] = useUserRegisterMutation();
 
-    const [errorMassage, setErrorMassage] = useState<{ errorMassage: string ,flagGlobal:boolean,flagPass:boolean,flagEmail:boolean }>({
+    const [errorMassage, setErrorMassage] = useState<IerrorMassage>({
         errorMassage: "",
         flagGlobal: false,
         flagPass: false,
@@ -42,54 +42,79 @@ const ModalRegister = () => {
 
     const handleuserRegister = async () => {
         if (Object.values(isRegister).some((field) => !field.length)) {
-            setErrorMassage({ errorMassage: "Все поля должны быть заполненны" });
-            setFlagError(true);
+            setErrorMassage((prev) => ({
+                ...prev,
+                errorMassage: "Все поля должны быть заполнены",
+                flagGlobal: true,
+            }));
         } else if (isRegister.password !== isRegister.passwordRepeat) {
-            setErrorMassage({ errorMassage: "Пароли не совпадают" });
-            setFlagPass(true);
-        }else if (isRegister.password.length < 5) {
-            setErrorMassage({ errorMassage: "Пароль не может быть меньше 5 символов" });
-            setFlagPass(true);
-        }else if ( !validateEmail(isRegister.email)) {
-            setErrorMassage({ errorMassage: "Некорректный email. Пожалуйста, введите email в формате email@gmail.com." });
-            setFlagEmail(true);
+            setErrorMassage((prev) => ({
+                ...prev,
+                errorMassage: "Пароли не совпадают",
+                flagPass: true,
+            }));
+            // setErrorMassage({ errorMassage: "Пароли не совпадают" });
+            // setFlagPass(true);
+        } else if (isRegister.password.length < 5) {
+            setErrorMassage((prev) => ({
+                ...prev,
+                errorMassage: "Пароль не может быть меньше 5 символов",
+                flagPass: true,
+            }));
+            // setErrorMassage({ errorMassage: "Пароль не может быть меньше 5 символов" });
+            // setFlagPass(true);
+        } else if (!validateEmail(isRegister.email)) {
+            setErrorMassage((prev) => ({
+                ...prev,
+                errorMassage: "Некорректный email. Пожалуйста, введите email в формате email@gmail.com",
+                flagEmail: true,
+            }));
+            // setErrorMassage({ errorMassage: "Некорректный email. Пожалуйста, введите email в формате email@gmail.com." });
+            // setFlagEmail(true);
         } else {
             try {
-                // await userRegister(isRegister).unwrap();
-                dispatch(closeModalRegister());
-                dispatch(openModalRegisterOk());
+                await userRegister(isRegister).unwrap();
+                // dispatch(closeModalRegister());
+                // dispatch(openModalRegisterOk());
             } catch (error) {
                 console.log(error);
-                setErrorMassage({ errorMassage: "Такой пользователь уже существует" });
-                setFlagError(true);
-                setIsRegister({
-                    email: "",
-                    name: "",
-                    surname: "",
-                    password: "",
-                    passwordRepeat: "",
-                });
+                setErrorMassage((prev) => ({
+                    ...prev,
+                    errorMassage: "Этот email уже занят,попробуйте другой",
+                    flagEmail: true,
+                }));
+                // setErrorMassage({ errorMassage: "Такой пользователь уже существует" });
+                // setFlagError(true);
+                // setIsRegister((prev) => ({
+                //     ...prev,
+                //     email: "",
+                // }));
 
             }
         }
     };
 
-    // useEffect(() => {
-    //     if (isSuccess) {
-    //         dispatch(closeModalRegister());
-    //         dispatch(openModalRegisterOk());
-    //         setIsRegister({
-    //             email: "",
-    //             name: "",
-    //             surname: "",
-    //             password: "",
-    //             passwordRepeat: "",
-    //         });
-    //         setErrorMassage({ errorMassage: "" });
-    //         setFlagError(false);
-    //         setFlagPass(false);
-    //     }
-    // }, [isSuccess, dispatch]);
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(closeModalRegister());
+            dispatch(openModalRegisterOk());
+            setIsRegister({
+                email: "",
+                name: "",
+                surname: "",
+                password: "",
+                passwordRepeat: "",
+            });
+            setErrorMassage((prev) => (
+                {
+                    ...prev,
+                    flagGlobal: false,
+                    flagEmail: false,
+                    flagPass: false,
+                    errorMassage: ""
+                }));
+        }
+    }, [isSuccess, dispatch]);
 
     if (isLoading) {
         return <Loading />;
@@ -115,12 +140,13 @@ const ModalRegister = () => {
                             isName="email"
                             img={dataAuth.imgEmail}
                             placeholder={dataAuth.placeholderEmail}
-                            setErrorMassage={setErrorMassage}
-                            flagError={flagError}
-                            setFlagError={setFlagError}
                             type="email"
-                            flagPass={flagPass}
-                            setFlagPass={setFlagPass}
+                            errorMassage={errorMassage}
+                            setErrorMassage={setErrorMassage}
+                            // flagError={flagError}
+                            // setFlagError={setFlagError}
+                            // flagPass={flagPass}
+                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -129,12 +155,13 @@ const ModalRegister = () => {
                             isName="name"
                             img={dataAuth.imgNameSurnume}
                             placeholder={dataAuth.placeholderName}
-                            setErrorMassage={setErrorMassage}
-                            flagError={flagError}
-                            setFlagError={setFlagError}
                             type="text"
-                            flagPass={flagPass}
-                            setFlagPass={setFlagPass}
+                            errorMassage={errorMassage}
+                            setErrorMassage={setErrorMassage}
+                            // flagError={flagError}
+                            // setFlagError={setFlagError}
+                            // flagPass={flagPass}
+                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -143,12 +170,13 @@ const ModalRegister = () => {
                             isName="surname"
                             img={dataAuth.imgNameSurnume}
                             placeholder={dataAuth.placeholderSurnume}
-                            setErrorMassage={setErrorMassage}
-                            flagError={flagError}
-                            setFlagError={setFlagError}
                             type="text"
-                            flagPass={flagPass}
-                            setFlagPass={setFlagPass}
+                            errorMassage={errorMassage}
+                            setErrorMassage={setErrorMassage}
+                            // flagError={flagError}
+                            // setFlagError={setFlagError}
+                            // flagPass={flagPass}
+                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -157,12 +185,13 @@ const ModalRegister = () => {
                             isName="password"
                             img={dataAuth.imgPass}
                             placeholder={dataAuth.placeholderPass}
-                            setErrorMassage={setErrorMassage}
-                            flagError={flagError}
-                            setFlagError={setFlagError}
                             type="password"
-                            flagPass={flagPass}
-                            setFlagPass={setFlagPass}
+                            errorMassage={errorMassage}
+                            setErrorMassage={setErrorMassage}
+                            // flagError={flagError}
+                            // setFlagError={setFlagError}
+                            // flagPass={flagPass}
+                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -171,12 +200,13 @@ const ModalRegister = () => {
                             isName="passwordRepeat"
                             img={dataAuth.imgPass}
                             placeholder={dataAuth.placeholderPassRepeat}
-                            setErrorMassage={setErrorMassage}
-                            flagError={flagError}
-                            setFlagError={setFlagError}
                             type="password"
-                            flagPass={flagPass}
-                            setFlagPass={setFlagPass}
+                            errorMassage={errorMassage}
+                            setErrorMassage={setErrorMassage}
+                            // flagError={flagError}
+                            // setFlagError={setFlagError}
+                            // flagPass={flagPass}
+                            // setFlagPass={setFlagPass}
                         />
                     </div>
                     <BtnBrandActive

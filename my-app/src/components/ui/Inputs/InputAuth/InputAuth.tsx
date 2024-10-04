@@ -6,33 +6,40 @@ import style from "./inputAuth.module.css";
 
 const InputAuth: React.FC<InputAuthProps> = ({
   img,
+  type,
   placeholder,
   auth,
   setAuth,
   isName,
   setErrorMassage,
-  flagError,
-  setFlagError,
-  type,
-  flagPass,
-  setFlagPass,
+  errorMassage,
 }) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAuth((prev) => ({ ...prev, [isName]: e.target.value }));
-    setErrorMassage((prev) => ({ ...prev, errorMassage: "" }));
-    setFlagError(false);
-    setFlagPass(false);
+      setErrorMassage((prev) => (
+          {
+              ...prev,
+              flagGlobal: false,
+              flagEmail: false,
+              flagPass: false,
+              errorMassage: ""
+          }));
+    // setFlagError(false);
+    // setFlagPass(false);
   };
 
   const rootClasses = [style.auth];
-  if (flagError && !auth) {
+  if (errorMassage?.flagGlobal && !auth) {
     rootClasses.push(style.active);
   }
-  if (auth && !(flagPass && (isName === "password" || isName === "passwordRepeat"))) {
+  if (auth && !((errorMassage.flagPass) && (errorMassage.flagEmail)  )) {
     rootClasses.push(style.activeFocus);
   }
-  if (flagPass && (isName === "password" || isName === "passwordRepeat")) {
+  if (errorMassage?.flagPass && (isName === "password" || isName === "passwordRepeat")) {
+    rootClasses.push(style.activePass);
+  }
+  if (errorMassage?.flagEmail && (isName === "email" )) {
     rootClasses.push(style.activePass);
   }
 
