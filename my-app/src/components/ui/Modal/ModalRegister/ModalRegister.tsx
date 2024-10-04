@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useUserRegisterMutation } from "../../../../api/cinemaGuideApi";
 import { dataAuth } from "../../../../data/dataAuth";
 import { openModalLogin } from "../../../../redux/modalLoginSlice";
-import { openModalRegisterOk } from "../../../../redux/modalRegisterOkSlice";
 import { closeModalRegister, selectModalRegister } from "../../../../redux/modalRegisterSlice";
 import { BodyUserRegister } from "../../../../types/types";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
@@ -11,6 +10,11 @@ import InputAuth from "../../Inputs/InputAuth/InputAuth";
 import style from "./ModalRegister.module.css";
 
 const ModalRegister = () => {
+    const [errorMassage, setErrorMassage] = useState({
+        massagePassword: "",
+        massageUser:"Такой пользователь уже есть"
+    })
+
     const [isRegister, setIsRegister] = useState<BodyUserRegister>({
         email: "",
         name: "",
@@ -27,25 +31,24 @@ const ModalRegister = () => {
         console.log("Пороли не совподают!");
     }
 
+
+
     const handleuserRegister = async () => {
-        if (userRegister) {
-            if (isRegister.password !== isRegister.passwordRepeat) {
-                console.log("Пороли не совподают!");
-                return;
-            }
-            await userRegister(isRegister).unwrap();
-            dispatch(closeModalRegister());
-            dispatch(openModalRegisterOk());
+        if (isRegister.password !== isRegister.passwordRepeat) {
+            setErrorMassage((prev) => ({
+                ...prev,
+                massagePassword: "Пороли не совподают"
+            }));
         }
+
+        // if (userRegister) {
+        //     await userRegister(isRegister).unwrap();
+        //     dispatch(closeModalRegister());
+        //     dispatch(openModalRegisterOk());
+        // }
+
     };
 
-    console.log(isRegister, "isRegister");
-    if (isRegister.password === isRegister.passwordRepeat) {
-        console.log("Равны");
-    }
-    if (isRegister.password !== isRegister.passwordRepeat) {
-        console.log("НЕЕЕРавны");
-    }
 
     const dispatch = useDispatch();
     const isModalRegister = useSelector(selectModalRegister);
@@ -62,7 +65,7 @@ const ModalRegister = () => {
                     <h3 className={style.regitser__title}>Регистрация</h3>
                     <div className={style.authInput__wrapper}>
                         {error && <span className={style.massage}>Такой пользователь уже существует</span>}
-                        {isRegister.password !== isRegister.passwordRepeat && <span className={style.massage}>Такой пользователь уже существует</span>}
+                        {errorMassage.massagePassword && <span className={style.massage}>{ errorMassage.massagePassword}</span>}
                         <InputAuth auth={isRegister.email} setAuth={setIsRegister} isName={"email"} img={dataAuth[0].img} placeholder={dataAuth[0].placeholder} />
                         <InputAuth auth={isRegister.name} setAuth={setIsRegister} isName={"name"} img={dataAuth[1].img} placeholder={dataAuth[1].placeholder1} />
                         <InputAuth auth={isRegister.surname} setAuth={setIsRegister} isName={"surname"} img={dataAuth[1].img} placeholder={dataAuth[1].placeholder2} />

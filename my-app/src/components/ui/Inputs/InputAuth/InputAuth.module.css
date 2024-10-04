@@ -12,12 +12,16 @@
 }
 
 .input__auth {
-    width: 100%;
+      width: 100%;
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 18px;
     line-height: 133%;
     color: var(--content-placeholder);
+}
+
+.svg_1 {
+    color: #ff7575;
 }
 
 @media only screen and (max-width:1024px) {
