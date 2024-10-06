@@ -23,10 +23,6 @@ const ModalRegister = () => {
         flagEmail:false,
     });
 
-    const [flagError, setFlagError] = useState<boolean>(false);
-    const [flagPass, setFlagPass] = useState<boolean>(false);
-    const [flagEmail, setFlagEmail] = useState<boolean>(false);
-
     const [isRegister, setIsRegister] = useState<BodyUserRegister>({
         email: "",
         name: "",
@@ -53,29 +49,25 @@ const ModalRegister = () => {
                 errorMassage: "Пароли не совпадают",
                 flagPass: true,
             }));
-            // setErrorMassage({ errorMassage: "Пароли не совпадают" });
-            // setFlagPass(true);
+
         } else if (isRegister.password.length < 5) {
             setErrorMassage((prev) => ({
                 ...prev,
                 errorMassage: "Пароль не может быть меньше 5 символов",
                 flagPass: true,
             }));
-            // setErrorMassage({ errorMassage: "Пароль не может быть меньше 5 символов" });
-            // setFlagPass(true);
+
         } else if (!validateEmail(isRegister.email)) {
             setErrorMassage((prev) => ({
                 ...prev,
                 errorMassage: "Некорректный email. Пожалуйста, введите email в формате email@gmail.com",
                 flagEmail: true,
             }));
-            // setErrorMassage({ errorMassage: "Некорректный email. Пожалуйста, введите email в формате email@gmail.com." });
-            // setFlagEmail(true);
+
         } else {
             try {
                 await userRegister(isRegister).unwrap();
-                // dispatch(closeModalRegister());
-                // dispatch(openModalRegisterOk());
+
             } catch (error) {
                 console.log(error);
                 setErrorMassage((prev) => ({
@@ -83,12 +75,6 @@ const ModalRegister = () => {
                     errorMassage: "Этот email уже занят,попробуйте другой",
                     flagEmail: true,
                 }));
-                // setErrorMassage({ errorMassage: "Такой пользователь уже существует" });
-                // setFlagError(true);
-                // setIsRegister((prev) => ({
-                //     ...prev,
-                //     email: "",
-                // }));
 
             }
         }
@@ -143,10 +129,6 @@ const ModalRegister = () => {
                             type="email"
                             errorMassage={errorMassage}
                             setErrorMassage={setErrorMassage}
-                            // flagError={flagError}
-                            // setFlagError={setFlagError}
-                            // flagPass={flagPass}
-                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -158,10 +140,6 @@ const ModalRegister = () => {
                             type="text"
                             errorMassage={errorMassage}
                             setErrorMassage={setErrorMassage}
-                            // flagError={flagError}
-                            // setFlagError={setFlagError}
-                            // flagPass={flagPass}
-                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -173,10 +151,6 @@ const ModalRegister = () => {
                             type="text"
                             errorMassage={errorMassage}
                             setErrorMassage={setErrorMassage}
-                            // flagError={flagError}
-                            // setFlagError={setFlagError}
-                            // flagPass={flagPass}
-                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -188,10 +162,6 @@ const ModalRegister = () => {
                             type="password"
                             errorMassage={errorMassage}
                             setErrorMassage={setErrorMassage}
-                            // flagError={flagError}
-                            // setFlagError={setFlagError}
-                            // flagPass={flagPass}
-                            // setFlagPass={setFlagPass}
                         />
 
                         <InputAuth
@@ -203,10 +173,6 @@ const ModalRegister = () => {
                             type="password"
                             errorMassage={errorMassage}
                             setErrorMassage={setErrorMassage}
-                            // flagError={flagError}
-                            // setFlagError={setFlagError}
-                            // flagPass={flagPass}
-                            // setFlagPass={setFlagPass}
                         />
                     </div>
                     <BtnBrandActive

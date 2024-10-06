@@ -5,35 +5,35 @@
     padding: 16px;
     width: 100%;
     height: 56px;
-    &:focus {
-        box-shadow: 0 0 5px 2px rgba(29, 187, 8, 0.5); /* Тень при фокусе */
-        outline: none; /* Убираем стандартное обрамление */
-    }
 
 }
-.auth.active {
+.auth.activeError {
     border: 1px solid #ff7575;
 }
 .auth.activeFocus {
     box-shadow: 0 0 5px 2px rgba(108, 230, 92, 0.5); /* Тень при фокусе */
     outline: none; /* Убираем стандартное обрамление */
 }
-.auth.activePass {
-    border: 1px solid #ff7575;
-}
+
 
 .img__auth {
     margin-right: 14px;
+
+}
+.img__auth.activeErrorImg {
+    filter: invert(53%) sepia(87%) saturate(604%) hue-rotate(322deg) brightness(101%) contrast(101%);
 }
 
 .input__auth {
-      width: 100%;
+    width: 100%;
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 18px;
     line-height: 133%;
     color: var(--content-placeholder);
     transition: box-shadow 0.3s ease;
+
+
 }
 
 

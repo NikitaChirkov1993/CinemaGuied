@@ -1,16 +1,15 @@
-import React, { ChangeEvent, useState } from "react";
-import { InputAuthProps } from "../../../../types/types";
-import style from "./inputAuth.module.css";
+import { ChangeEvent, useState } from "react";
+import { InputLoginProps } from "../../../../types/types";
+import style from "./InputAuth.module.css";
 
-const InputAuth: React.FC<InputAuthProps> = ({ img, type, placeholder, auth, setAuth, isName, setErrorMassage, errorMassage }) => {
+const InputLogin: React.FC<InputLoginProps> = ({img,placeholder,type,isName,isLogin,setIsLogin,errorMassage,setErrorMassage}) => {
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setAuth((prev) => ({ ...prev, [isName]: e.target.value }));
+        setIsLogin((prev) => ({ ...prev, [isName]: e.target.value }));
         setErrorMassage((prev) => ({
             ...prev,
-            flagGlobal: false,
-            flagEmail: false,
-            flagPass: false,
             errorMassage: "",
+            flagGlobal: false,
         }));
 
     };
@@ -19,27 +18,21 @@ const InputAuth: React.FC<InputAuthProps> = ({ img, type, placeholder, auth, set
 
     const rootClasses = [style.auth];
     const rootClassesImg = [style.img__auth];
-    if (errorMassage?.flagGlobal && !auth) {
+    if (errorMassage?.flagGlobal && !isLogin ) {
         rootClasses.push(style.activeError);
         rootClassesImg.push(style.activeErrorImg);
     }
     if (isFocused) {
         rootClasses.push(style.activeFocus);
     }
-    if (errorMassage?.flagPass && (isName === "password" || isName === "passwordRepeat")) {
-        rootClasses.push(style.activeError);
-        rootClassesImg.push(style.activeErrorImg);
-    }
-    if (errorMassage?.flagEmail && isName === "email") {
-        rootClasses.push(style.activeError);
-        rootClassesImg.push(style.activeErrorImg);
-    }
+
+
 
     return (
         <div className={rootClasses.join(" ")}>
             <img className={rootClassesImg.join(" ")} src={img} alt="icon" />
             <input
-                value={auth}
+                value={isLogin}
                 onChange={handleChange}
                 placeholder={placeholder}
                 className={style.input__auth}
@@ -49,6 +42,6 @@ const InputAuth: React.FC<InputAuthProps> = ({ img, type, placeholder, auth, set
             />
         </div>
     );
-};
+}
 
-export default InputAuth;
+export default InputLogin;
