@@ -16,8 +16,6 @@ const AboutFilmPosterRandom = () => {
 
     const { data, refetch, isFetching, error} = useMovieRandomQuery();
 
-
-
     if (isFetching) {
         return <Loading />; // Можно отобразить индикатор загрузки
     }

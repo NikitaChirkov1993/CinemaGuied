@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BodyUserLogin, BodyUserRegister, Movie, MovieQueryParams, ResponseBodyProfile, ResponseUserAuth } from "../types/types";
+import { BodyUserLogin, BodyUserRegister, Movie, MovieQueryParams, ResponseGlobal, ResponseProfile } from "../types/types";
 
 export const cinemaGuideApi = createApi({
     reducerPath: "cinemaGuideApi",
@@ -35,14 +35,14 @@ export const cinemaGuideApi = createApi({
                 return `/movie?${params.toString()}`; // Возвращаем запрос с параметрами
             },
         }),
-        userRegister: build.mutation<ResponseUserAuth,BodyUserRegister>({
+        userRegister: build.mutation<ResponseGlobal,BodyUserRegister>({
             query: (body) => ({
                 url: "/user",
                 method: "POST",
                 body,
             })
         }),
-        userLogin: build.mutation<ResponseUserAuth,BodyUserLogin>({
+        userLogin: build.mutation<ResponseGlobal,BodyUserLogin>({
             query: (body) => ({
                 url: "/auth/login",
                 method: "POST",
@@ -50,16 +50,35 @@ export const cinemaGuideApi = createApi({
             }),
 
         }),
-        userPofile: build.query<ResponseBodyProfile,void>({
+        userPofile: build.query<ResponseProfile,void>({
             query: () => "/profile",
             providesTags: ['User'],
         }),
-        userLogout: build.mutation({
+        userLogout: build.mutation<void,void>({
             query: () => ({
                 url: "/auth/logout",
                 method: "GET",
             }),
             invalidatesTags: ['User'],
+          }),
+        getFavorites: build.query<Movie[],void>({
+            query: () => ({
+                url: "/favorites",
+                method: "GET",
+            }),
+          }),
+        DeleteFavorites: build.mutation<ResponseGlobal,number>({
+            query: (movieId) => ({
+                url: `/favorites/${movieId}`,
+                method: "DELETE",
+            }),
+          }),
+        PostFavorites: build.mutation<ResponseGlobal,string>({
+            query: (movieId) => ({
+                url: "/favorites",
+                method: "POST",
+                body:movieId,
+            }),
           }),
 
     }),
@@ -75,4 +94,6 @@ export const {
     useUserLoginMutation,
     useUserPofileQuery,
     useUserLogoutMutation,
+    useGetFavoritesQuery,
+    useDeleteFavoritesMutation,
 } = cinemaGuideApi;

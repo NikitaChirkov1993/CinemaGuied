@@ -24,15 +24,20 @@
 
 .icon__delete {
     position: absolute;
-    /* z-index: 50; */
     display: flex;
     justify-content: center;
     align-items: center;
-    right: -10px; /* Выпирает за границу контейнера */
+    right: -10px;
     top: -10px;
     border-radius: 30px;
     width: 40px;
     height: 40px;
     background: var(--content-secondary);
     transition: opacity 0.3s ease-in-out;
+    &:hover{
+        opacity: 0.3;
+    }
+    &:active{
+        opacity: 0.3;
+    }
 }

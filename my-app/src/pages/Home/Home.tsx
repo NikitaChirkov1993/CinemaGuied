@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useMovieTop10Query } from "../../api/cinemaGuideApi";
 import AboutFilmPosterRandom from "../../components/AboutFilmPoster/AboutFilmPosterRandom";
@@ -7,6 +8,16 @@ import Loading from "../../components/ui/Loading/Loading";
 import style from "./Home.module.css";
 
 const Home = () => {
+
+    useEffect(() => {
+        const hasSeenAlert = localStorage.getItem("cookieAlertShown");
+
+        if (!hasSeenAlert) {
+          alert("Этот сайт использует cookies для улучшения вашего опыта.");
+          localStorage.setItem("cookieAlertShown", "true");
+        }
+      }, []);
+
     const { data, isFetching, error } = useMovieTop10Query();
     console.log(data);
     if (isFetching) {
@@ -35,7 +46,7 @@ const Home = () => {
                                         {item.posterUrl ? (
                                             <img className={style.item__img} src={item.posterUrl} alt="film" />
                                         ) : (
-                                            <img className={style.item__img} src="./../../../public/imgs/no3.webp" alt="filmNO" />
+                                            <img className={style.item__img} src="/imgs/no3.webp" alt="filmNO" />
                                         )}
                                     </NavLink>
                                 </li>

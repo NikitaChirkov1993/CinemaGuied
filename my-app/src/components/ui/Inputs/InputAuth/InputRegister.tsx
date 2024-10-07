@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { InputAuthProps } from "../../../../types/types";
 import style from "./inputAuth.module.css";
 
-const InputAuth: React.FC<InputAuthProps> = ({ img, type, placeholder, auth, setAuth, isName, setErrorMassage, errorMassage }) => {
+const InputRegister: React.FC<InputAuthProps> = ({ img, type, placeholder, auth, setAuth, isName, setErrorMassage, errorMassage }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setAuth((prev) => ({ ...prev, [isName]: e.target.value }));
         setErrorMassage((prev) => ({
@@ -51,4 +51,4 @@ const InputAuth: React.FC<InputAuthProps> = ({ img, type, placeholder, auth, set
     );
 };
 
-export default InputAuth;
+export default InputRegister;

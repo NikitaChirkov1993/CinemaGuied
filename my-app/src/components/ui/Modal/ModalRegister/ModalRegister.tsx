@@ -7,7 +7,7 @@ import { openModalRegisterOk } from "../../../../redux/modalRegisterOkSlice";
 import { closeModalRegister, selectModalRegister } from "../../../../redux/modalRegisterSlice";
 import { BodyUserRegister, IerrorMassage } from "../../../../types/types";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
-import InputAuth from "../../Inputs/InputAuth/InputAuth";
+import InputRegister from "../../Inputs/InputAuth/InputRegister";
 import Loading from "../../Loading/Loading";
 import style from "./ModalRegister.module.css";
 
@@ -120,7 +120,7 @@ const ModalRegister = () => {
                     <div className={style.authInput__wrapper}>
                         {errorMassage.errorMassage && <span className={style.massage}>{errorMassage.errorMassage}</span>}
 
-                        <InputAuth
+                        <InputRegister
                             auth={isRegister.email}
                             setAuth={setIsRegister}
                             isName="email"
@@ -131,7 +131,7 @@ const ModalRegister = () => {
                             setErrorMassage={setErrorMassage}
                         />
 
-                        <InputAuth
+                        <InputRegister
                             auth={isRegister.name}
                             setAuth={setIsRegister}
                             isName="name"
@@ -142,7 +142,7 @@ const ModalRegister = () => {
                             setErrorMassage={setErrorMassage}
                         />
 
-                        <InputAuth
+                        <InputRegister
                             auth={isRegister.surname}
                             setAuth={setIsRegister}
                             isName="surname"
@@ -153,7 +153,7 @@ const ModalRegister = () => {
                             setErrorMassage={setErrorMassage}
                         />
 
-                        <InputAuth
+                        <InputRegister
                             auth={isRegister.password}
                             setAuth={setIsRegister}
                             isName="password"
@@ -164,7 +164,7 @@ const ModalRegister = () => {
                             setErrorMassage={setErrorMassage}
                         />
 
-                        <InputAuth
+                        <InputRegister
                             auth={isRegister.passwordRepeat}
                             setAuth={setIsRegister}
                             isName="passwordRepeat"

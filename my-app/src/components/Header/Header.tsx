@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { selectisAuth } from "../../redux/isAuthenticatedSlice";
 import { openModalLogin } from "../../redux/modalLoginSlice";
@@ -11,22 +11,15 @@ import ModalRegitserOK from "../ui/Modal/ModalRegitserOK/ModalRegitserOK";
 import style from "./Header.module.css";
 
 const Header = () => {
-
+    const dispatch = useDispatch();
     const { data, isLoading, isError, refetch,isSuccess } = useUserPofileQuery();
-    const selectorIsAuth = useSelector(selectisAuth);
-
-
-    console.log(selectorIsAuth, "selectorIsAuth");
-    // console.log(data, "dataPROFILE");
+    // const selectorIsAuth = useSelector(selectisAuth);
+    const navigate = useNavigate();
 
     if (isSuccess) {
         console.log(data,"dataPROFILE");
-
     }
 
-
-
-    const dispatch = useDispatch();
     return (
         <header className={style.header}>
             <div className="container">
@@ -48,7 +41,6 @@ const Header = () => {
 
                         <InputMenu />
 
-
                         { !data   ?
                             <BtnMenu onClick={() => dispatch(openModalLogin())}>Войти</BtnMenu>
                             :
@@ -56,7 +48,6 @@ const Header = () => {
                                 <BtnMenu>{ data?.name}</BtnMenu>
                             </NavLink>
                         }
-
 
                         <ModalLogin/>
 
@@ -75,23 +66,31 @@ const Header = () => {
                         <div className={style.icon}>
                             <img src="/imgs/searchmenu.svg" alt="Поиск" />
                         </div>
-                        {/* <NavLink className={style.link}  to={"/account"}>
-                            <div className={style.icon}>
-                                <img src="/imgs/user.svg" alt="Войти" />
-                            </div>
-                        </NavLink> */}
+
                          <ModalLogin />
 
                         <ModalRegister/>
 
-                        <ModalRegitserOK/>
-                        <div
+                        <ModalRegitserOK />
+                        {!data ?
+
+                            <div
                             onClick={() => {
                                 dispatch(openModalLogin());
                             }}
                             className={style.icon}>
-                            <img src="/imgs/user.svg" alt="Войти" />
-                        </div>
+                            <img src="/imgs/key.svg" alt="Войти" />
+                            </div>
+                            :
+                            <div
+                            onClick={() => {
+                                navigate("/account")
+                            }}
+                            className={style.icon}>
+                            <img src="/imgs/user.svg" alt="Аккаунт" />
+                            </div>
+                        }
+
                     </nav>
                 </div>
             </div>
