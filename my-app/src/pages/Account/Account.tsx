@@ -1,15 +1,54 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useUserLogoutMutation, useUserPofileQuery } from "../../api/cinemaGuideApi";
 import FavoritesItem from "../../components/FavoritesItem/FavoritesItem";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import BtnBrandActive from "../../components/ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnUseControl from "../../components/ui/Buttons/BtnUseControl/BtnUseControl";
+import Loading from "../../components/ui/Loading/Loading";
 import { dataTop10 } from "../../data/dataTop10";
 import style from "./Account.module.css";
 
 const Account = () => {
     const [activeTab, setActiveTab] = useState<"favorites" | "settings">("favorites");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const {data,isLoading,isError,isFetching,refetch } = useUserPofileQuery();
+    // const {isSuccess } = useUserLogoutQuery();
+
+    const [userLogout, { isSuccess,isLoading:LoadingLogout }] = useUserLogoutMutation();
+
+    // if (isSuccess) {
+    //     navigate("/")
+    // }
+
+    const handleLogout = async () => {
+        try {
+            await userLogout().unwrap(); // Выполняем запрос
+
+        } catch (error) {
+            console.error("Ошибка при выходе из аккаунта:", error);
+        }
+    };
+
+    if (LoadingLogout) {
+        return (
+            <Loading />
+        )
+    }
+
+        if (isSuccess) {
+            // dispatch(cinemaGuideApi.util.invalidateTags(['User']));
+            // dispatch(isAuthtrue());
+            navigate("/");
+            window.location.reload();
+
+        }
+
+
 
     return (
         <div className="wrapper">
@@ -49,7 +88,7 @@ const Account = () => {
                                 </div>
                                 <div className={style.info__name}>
                                     <p className={style.info__title}>Имя Фамилия</p>
-                                    <p className={style.info__text}>Никита Чирков</p>
+                                    <p className={style.info__text}>{data?.name} { data?.surname}</p>
                                 </div>
                             </li>
 
@@ -59,13 +98,13 @@ const Account = () => {
                                 </div>
                                 <div className={style.info__name}>
                                     <p className={style.info__title}>Электронная почта</p>
-                                    <p className={style.info__text}>example@domain.com </p>
+                                    <p className={style.info__text}>{ data?.email}</p>
                                 </div>
                             </li>
                             <div className={style.btn__wrapper}>
-                                <NavLink to={"/"}>
-                                    <BtnBrandActive>Выйти из аккаунта</BtnBrandActive>
-                                </NavLink>
+                                    <BtnBrandActive onClick={handleLogout} >Выйти из аккаунта</BtnBrandActive>
+                                {/* <NavLink to={"/"}>
+                                </NavLink> */}
                             </div>
                         </ul>
                     )}

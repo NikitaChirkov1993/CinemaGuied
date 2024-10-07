@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BodyUserRegister, Movie, MovieQueryParams, ResponseUserRegister } from "../types/types";
+import { BodyUserLogin, BodyUserRegister, Movie, MovieQueryParams, ResponseBodyProfile, ResponseUserAuth } from "../types/types";
 
 export const cinemaGuideApi = createApi({
     reducerPath: "cinemaGuideApi",
+    tagTypes: ['User'],
     baseQuery: fetchBaseQuery({
         baseUrl: "https://cinemaguide.skillbox.cc/",
+        credentials: 'include',
     }),
     endpoints: (build) => ({
         movieRandom: build.query<Movie, void>({
@@ -33,13 +35,32 @@ export const cinemaGuideApi = createApi({
                 return `/movie?${params.toString()}`; // Возвращаем запрос с параметрами
             },
         }),
-        userRegister: build.mutation<ResponseUserRegister,BodyUserRegister>({
+        userRegister: build.mutation<ResponseUserAuth,BodyUserRegister>({
             query: (body) => ({
                 url: "/user",
                 method: "POST",
                 body,
             })
-        })
+        }),
+        userLogin: build.mutation<ResponseUserAuth,BodyUserLogin>({
+            query: (body) => ({
+                url: "/auth/login",
+                method: "POST",
+                body,
+            }),
+
+        }),
+        userPofile: build.query<ResponseBodyProfile,void>({
+            query: () => "/profile",
+            providesTags: ['User'],
+        }),
+        userLogout: build.mutation({
+            query: () => ({
+                url: "/auth/logout",
+                method: "GET",
+            }),
+            invalidatesTags: ['User'],
+          }),
 
     }),
 });
@@ -51,4 +72,7 @@ export const {
     useMovieGenereQuery,
     useMovieQuery,
     useUserRegisterMutation,
+    useUserLoginMutation,
+    useUserPofileQuery,
+    useUserLogoutMutation,
 } = cinemaGuideApi;

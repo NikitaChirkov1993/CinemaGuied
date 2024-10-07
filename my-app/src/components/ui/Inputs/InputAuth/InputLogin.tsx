@@ -10,6 +10,7 @@ const InputLogin: React.FC<InputLoginProps> = ({img,placeholder,type,isName,isLo
             ...prev,
             errorMassage: "",
             flagGlobal: false,
+            flagGlobal2: false,
         }));
 
     };
@@ -18,10 +19,15 @@ const InputLogin: React.FC<InputLoginProps> = ({img,placeholder,type,isName,isLo
 
     const rootClasses = [style.auth];
     const rootClassesImg = [style.img__auth];
-    if (errorMassage?.flagGlobal && !isLogin ) {
+    if (errorMassage?.flagGlobal && !isLogin   ) {
         rootClasses.push(style.activeError);
         rootClassesImg.push(style.activeErrorImg);
     }
+    if (errorMassage?.flagGlobal2) {
+        rootClasses.push(style.activeError);
+        rootClassesImg.push(style.activeErrorImg);
+    }
+
     if (isFocused) {
         rootClasses.push(style.activeFocus);
     }

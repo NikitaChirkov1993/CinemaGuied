@@ -37,7 +37,8 @@ export interface MovieQueryParams {
     genre?: string;
 }
 
-export interface ResponseUserRegister {
+export interface ResponseUserAuth {
+    code?: number;
     result?: boolean;
     error?: string;
 }
@@ -47,6 +48,12 @@ export interface BodyUserRegister {
     name: string;
     surname: string;
     passwordRepeat?: "" ;
+}
+export interface ResponseBodyProfile {
+    email: string;
+    favorites: [];
+    name: string;
+    surname: string;
 }
 export interface BodyUserLogin {
     email: string;
@@ -61,6 +68,7 @@ export interface IerrorMassage {
 export interface IerrorMassageLogin {
     errorMassage: string;
     flagGlobal: boolean;
+    flagGlobal2: boolean;
 }
 
 

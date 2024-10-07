@@ -1,5 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useUserPofileQuery } from "../../api/cinemaGuideApi";
+import { selectisAuth } from "../../redux/isAuthenticatedSlice";
 import { openModalLogin } from "../../redux/modalLoginSlice";
 import BtnMenu from "../ui/Buttons/BtnMenu/BtnMenu";
 import InputMenu from "../ui/Inputs/InputMenu/InputMenu";
@@ -9,6 +11,20 @@ import ModalRegitserOK from "../ui/Modal/ModalRegitserOK/ModalRegitserOK";
 import style from "./Header.module.css";
 
 const Header = () => {
+
+    const { data, isLoading, isError, refetch,isSuccess } = useUserPofileQuery();
+    const selectorIsAuth = useSelector(selectisAuth);
+
+
+    console.log(selectorIsAuth, "selectorIsAuth");
+    // console.log(data, "dataPROFILE");
+
+    if (isSuccess) {
+        console.log(data,"dataPROFILE");
+
+    }
+
+
 
     const dispatch = useDispatch();
     return (
@@ -31,10 +47,16 @@ const Header = () => {
                         </NavLink>
 
                         <InputMenu />
-                        {/* <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
-                            <BtnMenu>Никита</BtnMenu>
-                        </NavLink> */}
-                        <BtnMenu onClick={() => dispatch(openModalLogin())}>Войти</BtnMenu>
+
+
+                        { !data   ?
+                            <BtnMenu onClick={() => dispatch(openModalLogin())}>Войти</BtnMenu>
+                            :
+                            <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
+                                <BtnMenu>{ data?.name}</BtnMenu>
+                            </NavLink>
+                        }
+
 
                         <ModalLogin/>
 
@@ -58,7 +80,7 @@ const Header = () => {
                                 <img src="/imgs/user.svg" alt="Войти" />
                             </div>
                         </NavLink> */}
-                         <ModalLogin/>
+                         <ModalLogin />
 
                         <ModalRegister/>
 
