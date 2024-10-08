@@ -9,6 +9,7 @@ import BtnMix from "../ui/Buttons/BtnMix/BtnMix";
 import Loading from "../ui/Loading/Loading";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmPoster.module.css";
+import { getRatingColor } from "../../utils/utls";
 
 const AboutFilmPosterRandom = () => {
 
@@ -29,14 +30,8 @@ const AboutFilmPosterRandom = () => {
     if (!data) {
         return <div>No data available</div>; // Если данные все еще недоступны
     }
-    // Логика определения цвета рейтинга
-    const getRatingColor = (rating: number) => {
-        if (rating >= 0 && rating <= 4.2) return "#c82020";
-        if (rating > 4.3 && rating <= 6.3) return "#777";
-        if (rating > 6.3 && rating <= 7.5) return "#308e21";
-        if (rating > 7.5 && rating <= 10) return "#a59400";
-        return "black"; // значение по умолчанию, если вдруг рейтинг вне ожидаемых границ
-    };
+
+
 
     const ratingColor = getRatingColor(data.tmdbRating);
 

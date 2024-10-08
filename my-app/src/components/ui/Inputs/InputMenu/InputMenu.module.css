@@ -1,4 +1,5 @@
-.input__menu {
+.input__wrapper {
+    position: relative;
     display: flex;
     border-radius: 8px;
     padding: 16px;
@@ -8,14 +9,110 @@
     background: var(--background-secondary);
 }
 
-.input__img {
+.icon__serch {
     fill: var(--content-disabled);
     margin-right: 12px;
 }
 
 .input__serch {
+    width: 100%;
     background-color: inherit;
     font-size: 18px;
     line-height: 133%;
     color: var(--content-disabled);
+}
+
+.icon__close {
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.3;
+    }
+
+    &:active {
+        opacity: 0.3;
+    }
+}
+
+.list {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 70px;
+    padding: 116px;
+    bottom: 0;
+    border: 1px solid var(--content-disabled);
+    border-radius: 6px;
+    padding: 16px;
+    height: max-content;
+    width: 100%;
+    max-width: 600px;
+    background: var(--background-secondary);
+    z-index: 1000;
+}
+
+.list.visible {
+    display: flex;
+}
+
+.item {
+    display: flex;
+    cursor: pointer;
+    height: 52px;
+}
+
+.poster {
+    width: 40px;
+    object-fit: contain;
+    object-position: center;
+    border: 1px solid white;
+    margin-right: 16px;
+}
+
+.poster__infoWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.poster__info {
+    display: flex;
+    gap: 12px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143%;
+    color: var(--content-secondary);
+}
+
+.rating {
+    display: flex;
+    align-items: first baseline;
+    /* justify-content:space-between; */
+    padding: 2px 8px;
+    min-width: 47px;
+
+    border-radius: 16px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 133%;
+    color: var(--content-primary);
+}
+
+.rating__star {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+}
+
+.poster__title {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 133%;
+    color: var(--content-primary);
 }

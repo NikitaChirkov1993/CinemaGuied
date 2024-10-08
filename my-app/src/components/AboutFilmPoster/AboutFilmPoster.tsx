@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { toggleModal } from "../../redux/modalTrailerSlice";
+import { getRatingColor } from "../../utils/utls";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
@@ -10,15 +11,6 @@ const AboutFilmPoster = ({ data }) => {
     const dispatch = useDispatch();
 
     const { data:dataProfile  } = useUserPofileQuery();
-
-    // Логика определения цвета рейтинга
-    const getRatingColor = (rating: number) => {
-        if (rating >= 0 && rating <= 4.2) return "#c82020";
-        if (rating > 4.3 && rating <= 6.3) return "#777";
-        if (rating > 6.3 && rating <= 7.5) return "#308e21";
-        if (rating > 7.5 && rating <= 10) return "#a59400";
-        return "black"; // значение по умолчанию, если вдруг рейтинг вне ожидаемых границ
-    };
 
     const ratingColor = getRatingColor(data.tmdbRating);
 
