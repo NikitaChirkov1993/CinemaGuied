@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDeleteFavoritesMutation, useGetFavoritesQuery, usePostFavoritesMutation } from "../../../../api/cinemaGuideApi";
-import Loading from "../../Loading/Loading";
 import style from "./BtnFavorites.module.css";
 
 const BtnFavorites = ({ id }: { id: number  }) => {
@@ -40,11 +39,13 @@ const BtnFavorites = ({ id }: { id: number  }) => {
         <>
         {!isFavorites ?
             <button className={style.favorites} onClick={handleAddFavorites}>
-                {isLoadingPostFavorites ? <Loading /> : <img src="/imgs/on=false.svg" alt="Не в избранном" />}
+                {/* {isLoadingPostFavorites ? <Loading /> : <img src="/imgs/on=false.svg" alt="Не в избранном" />} */}
+                 <img src="/imgs/on=false.svg" alt="Не в избранном" />
             </button>
             :
             <button className={style.favorites} onClick={handeleDeleteFavorites }>
-                {isLoadingDelete ? <Loading /> : <img src="/imgs/on=true.svg" alt="В избранном" />}
+                {/* {isLoadingDelete ? <Loading /> : <img src="/imgs/on=true.svg" alt="В избранном" />} */}
+                 <img src="/imgs/on=true.svg" alt="В избранном" />
             </button>
         }
     </>

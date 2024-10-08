@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { toggleModal } from "../../redux/modalTrailerSlice";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
@@ -7,6 +8,8 @@ import style from "./AboutFilmPoster.module.css";
 
 const AboutFilmPoster = ({ data }) => {
     const dispatch = useDispatch();
+
+    const { data:dataProfile  } = useUserPofileQuery();
 
     // Логика определения цвета рейтинга
     const getRatingColor = (rating: number) => {
@@ -48,7 +51,7 @@ const AboutFilmPoster = ({ data }) => {
                     </div>
 
                     <div className={style.btn__not_trailer}>
-                        <BtnFavorites id={data?.id} />
+                        {dataProfile && <BtnFavorites id={data?.id} />}
                     </div>
                 </div>
             </div>

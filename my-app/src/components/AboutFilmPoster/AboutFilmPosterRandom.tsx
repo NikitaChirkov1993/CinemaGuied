@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useMovieRandomQuery } from "../../api/cinemaGuideApi";
+import { useMovieRandomQuery, useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { toggleModal } from "../../redux/modalTrailerSlice";
 import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
@@ -13,6 +13,8 @@ import style from "./AboutFilmPoster.module.css";
 const AboutFilmPosterRandom = () => {
 
     const dispatch = useDispatch();
+
+    const { data:dataProfile  } = useUserPofileQuery();
 
     const { data, refetch, isFetching, error} = useMovieRandomQuery();
 
@@ -75,7 +77,7 @@ const AboutFilmPosterRandom = () => {
                             <BtnAboutFilm />
                         </NavLink>
 
-                        <BtnFavorites id={data?.id} />
+                        {dataProfile && <BtnFavorites id={data?.id} />}
                         <BtnMix onClick={handleMovieMix} />
                     </div>
                 </div>
