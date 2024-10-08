@@ -54,11 +54,3 @@ const BtnFavorites = ({ id }: { id: number  }) => {
 };
 
 export default BtnFavorites;
-
-{/* <button className={style.favorites} onClick={handleToggleFavorites}>
-            {!isFavorites ?
-                <img src="/imgs/on=false.svg" alt="Не в избранном" />
-             :
-                <img src="/imgs/on=true.svg" alt="В избранном" />
-            }
-        </button> */}
