@@ -75,7 +75,7 @@ const AboutFilmPosterRandom = () => {
                             <BtnAboutFilm />
                         </NavLink>
 
-                        <BtnFavorites />
+                        <BtnFavorites id={data?.id} />
                         <BtnMix onClick={handleMovieMix} />
                     </div>
                 </div>

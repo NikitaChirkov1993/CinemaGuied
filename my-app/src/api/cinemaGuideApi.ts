@@ -74,10 +74,13 @@ export const cinemaGuideApi = createApi({
             }),
           }),
         PostFavorites: build.mutation<ResponseGlobal,string>({
-            query: (movieId) => ({
+            query: (id) => ({
                 url: "/favorites",
                 method: "POST",
-                body:movieId,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ id }),  // Преобразуем тело в формат x-www-form-urlencoded
             }),
           }),
 
@@ -96,4 +99,5 @@ export const {
     useUserLogoutMutation,
     useGetFavoritesQuery,
     useDeleteFavoritesMutation,
+    usePostFavoritesMutation,
 } = cinemaGuideApi;

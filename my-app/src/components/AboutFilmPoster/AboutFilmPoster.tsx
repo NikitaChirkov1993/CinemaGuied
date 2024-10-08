@@ -48,7 +48,7 @@ const AboutFilmPoster = ({ data }) => {
                     </div>
 
                     <div className={style.btn__not_trailer}>
-                        <BtnFavorites />
+                        <BtnFavorites id={data?.id} />
                     </div>
                 </div>
             </div>
