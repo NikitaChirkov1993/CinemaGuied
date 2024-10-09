@@ -4,7 +4,7 @@
   position: relative;
 }
 
-.link.active::after {
+ .link.active::after {
   content: "";
   position: absolute;
   left: 0;
@@ -15,11 +15,17 @@
   transition: width 0.5s ease-in-out;
 }
 
+
 .header__wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+.header__wrapper.center {
+  display: block;
+}
+
 
 .logo {
   display: flex;
@@ -127,8 +133,8 @@
   .menu__mobile {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
   }
-
 
 }
