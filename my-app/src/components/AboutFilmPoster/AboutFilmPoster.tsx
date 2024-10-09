@@ -4,6 +4,7 @@ import { toggleModal } from "../../redux/modalTrailerSlice";
 import { getRatingColor } from "../../utils/utls";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
+import BtnFavoritesNoAuth from "../ui/Buttons/BtnFavorites/BtnFavoritesNoAuth";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmPoster.module.css";
 
@@ -13,6 +14,12 @@ const AboutFilmPoster = ({ data }) => {
     const { data:dataProfile  } = useUserPofileQuery();
 
     const ratingColor = getRatingColor(data.tmdbRating);
+
+    const handleClickNOisFavorites = () => {
+        if (!dataProfile) {
+          alert("Это опция доступна только авторизованным пользователям");
+        }
+      };
 
     return (
         <div className={style.content}>
@@ -43,7 +50,12 @@ const AboutFilmPoster = ({ data }) => {
                     </div>
 
                     <div className={style.btn__not_trailer}>
-                        {dataProfile && <BtnFavorites id={data?.id} />}
+                    {!dataProfile ?
+                            <BtnFavoritesNoAuth onClick={handleClickNOisFavorites} />
+                            :
+                            <BtnFavorites id={data?.id} />
+                        }
+                        {/* {dataProfile && <BtnFavorites id={data?.id} />} */}
                     </div>
                 </div>
             </div>

@@ -25,7 +25,16 @@ const FavoritesFilm = ({ imges, id, refetchFavorites }: { imges: string; id: num
         <li className={style.item}>
             <div className={style.wrapper}>
                 <NavLink to={`/aboutFilm/${id}`}>
-                    {imges ? <img className={style.imges} src={imges} alt="Аватар фильма" /> : <img className={style.item__img} src="/imgs/no3.webp" alt="filmNO" />}
+                    {imges ?
+                        <img
+                            className={style.imges}
+                            src={imges}
+                            alt="Аватар фильма" />
+                        :
+                        <img
+                            className={style.item__img}
+                            src="/imgs/no3.webp"
+                            alt="filmNO" />}
                 </NavLink>
                 <div onClick={handeleDelete} className={style.icon__delete}>
                     <img src="/imgs/delete.svg" alt="Удалить" />

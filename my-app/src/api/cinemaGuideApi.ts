@@ -22,7 +22,7 @@ export const cinemaGuideApi = createApi({
             query: () => "/movie/genres",
         }),
         movie: build.query<Movie[], MovieQueryParams>({
-            query: ({ count=50 , page , title, genre }) => {
+            query: ({ count , page , title, genre }) => {
                 // Создаем параметры строки запроса
                 const params = new URLSearchParams();
 

@@ -17,6 +17,7 @@ const GenereFilm = () => {
     const { data, isLoading, refetch, error } = useMovieQuery({
         page: page,
         genre: genere,
+        count:50,
     });
     if (isLoading) {
         return <Loading />; // Можно отобразить индикатор загрузки

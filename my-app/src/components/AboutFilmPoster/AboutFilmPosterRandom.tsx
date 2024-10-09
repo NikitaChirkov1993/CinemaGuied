@@ -2,14 +2,15 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useMovieRandomQuery, useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { toggleModal } from "../../redux/modalTrailerSlice";
+import { getRatingColor } from "../../utils/utls";
 import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
+import BtnFavoritesNoAuth from "../ui/Buttons/BtnFavorites/BtnFavoritesNoAuth";
 import BtnMix from "../ui/Buttons/BtnMix/BtnMix";
 import Loading from "../ui/Loading/Loading";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmPoster.module.css";
-import { getRatingColor } from "../../utils/utls";
 
 const AboutFilmPosterRandom = () => {
 
@@ -38,6 +39,12 @@ const AboutFilmPosterRandom = () => {
     const handleMovieMix = () => {
         refetch();
     };
+
+    const handleClickNOisFavorites = () => {
+        if (!dataProfile) {
+          alert("Это опция доступна только авторизованным пользователям");
+        }
+      };
 
     return (
         <div className={style.content}>
@@ -72,8 +79,13 @@ const AboutFilmPosterRandom = () => {
                             <BtnAboutFilm />
                         </NavLink>
 
-                        {dataProfile && <BtnFavorites id={data?.id} />}
-                        <BtnMix onClick={handleMovieMix} />
+                        {!dataProfile ?
+                            <BtnFavoritesNoAuth onClick={handleClickNOisFavorites} />
+                            :
+                            <BtnFavorites id={data?.id} />
+                        }
+                         {/* {dataProfile && <BtnFavorites id={data?.id} />} */}
+                         <BtnMix onClick={handleMovieMix} />
                     </div>
                 </div>
             </div>
