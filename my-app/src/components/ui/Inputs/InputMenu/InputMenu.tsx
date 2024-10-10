@@ -5,7 +5,7 @@ import { getRatingColor } from "../../../../utils/utls";
 import Loading from "../../Loading/Loading";
 import style from "./InputMenu.module.css";
 
-const InputMenu = ({setIsSearchVisible,isSearchVisible}) => {
+const InputMenu = ({ setIsSearchVisible, isSearchVisible }) => {
     const [inputTitle, setInputTitle] = useState<string>("");
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,8 +36,7 @@ const InputMenu = ({setIsSearchVisible,isSearchVisible}) => {
     const handleClose = () => {
         setInputTitle("");
         setIsSearchVisible(!isSearchVisible);
-    }
-
+    };
 
     return (
         <div className={style.input__wrapper}>
@@ -45,34 +44,32 @@ const InputMenu = ({setIsSearchVisible,isSearchVisible}) => {
             <input value={inputTitle} onChange={handleChange} placeholder="Поиск" className={style.input__serch} type="text" />
             <img className={style.icon__close} onClick={handleClose} src="/imgs/inputMenuClose.svg " alt="Закрыть" />
             <ul className={rootClassList.join(" ")}>
-                {data?.length === 0 && (<div className={style.noFilm}>Совпадений не найдено!</div>)}
+                {data?.length === 0 && <div className={style.noFilm}>Совпадений не найдено!</div>}
                 {data.map((item) => {
                     const ratingColor = getRatingColor(item.tmdbRating);
                     return (
                         <NavLink key={item.id} to={`/aboutFilm/${item.id}`}>
                             <li className={style.item}>
-                                <div className={style.poster}>
-
-                                    {item.posterUrl ?
-                                        <img className={style.poster__img} src={item.posterUrl} alt="Постер" />
-                                        :
-                                        <img className={style.poster__img} src="/imgs/no3.webp" alt="filmNO" />
-                                    }
-
-                                </div>
-
-                                <div className={style.poster__infoWrapper}>
-                                    <div className={style.poster__info}>
-                                        <div className={style.rating} style={{ backgroundColor: ratingColor }}>
-                                            <img className={style.rating__star} src="/imgs/starRaiting.svg" alt="Рейтинг" />
-                                            <div className={style.rating__number}>{item.tmdbRating}</div>
-                                        </div>
-                                        <div className={style.year}>{item.releaseYear}</div>
-                                        <div className={style.genere}>{item.genres.join(",")}</div>
-                                        <div className={style.time}>{item.runtime} мин</div>
+                                    <div className={style.poster}>
+                                        {item.posterUrl ? (
+                                            <img className={style.poster__img} src={item.posterUrl} alt="Постер" />
+                                        ) : (
+                                            <img className={style.poster__img} src="/imgs/no3.webp" alt="filmNO" />
+                                        )}
                                     </div>
-                                    <h3 className={style.poster__title}>{item.title}</h3>
-                                </div>
+
+                                    <div className={style.poster__infoWrapper}>
+                                        <div className={style.poster__info}>
+                                            <div className={style.rating} style={{ backgroundColor: ratingColor }}>
+                                                <img className={style.rating__star} src="/imgs/starRaiting.svg" alt="Рейтинг" />
+                                                <div className={style.rating__number}>{item.tmdbRating}</div>
+                                            </div>
+                                            <div className={style.year}>{item.releaseYear}</div>
+                                            <div className={style.genere}>{item.genres.join(",")}</div>
+                                            <div className={style.time}>{item.runtime} мин</div>
+                                        </div>
+                                        <h3 className={style.poster__title}>{item.title}</h3>
+                                    </div>
                             </li>
                         </NavLink>
                     );
