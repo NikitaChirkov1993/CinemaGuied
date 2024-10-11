@@ -10,8 +10,21 @@ import style from "./InputMenu.module.css";
 const InputMenu = () => {
     const [inputTitle, setInputTitle] = useState<string>("");
 
+    const dispatch = useDispatch();
+
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setInputTitle(event.target.value);
+    };
+
+    // Хук useMovieQuery должен вызываться всегда, независимо от состояния inputTitle
+    const { data, isLoading, error } = useMovieQuery({
+        title: inputTitle , // Обеспечиваем, что запрос выполняется даже при пустом inputTitle
+        count: 5,
+    });
+
+    const handleClose = () => {
+        setInputTitle("");
+        dispatch(toggleIsSearchVisible());
     };
 
     const rootClassList = [style.list];
@@ -19,29 +32,17 @@ const InputMenu = () => {
         rootClassList.push(style.visible);
     }
 
-    const { data, isLoading, refetch, error } = useMovieQuery({
-        title: inputTitle,
-        count: 5,
-    });
     if (isLoading) {
-        return <Loading />; // Можно отобразить индикатор загрузки
+        return <Loading />; // Показываем индикатор загрузки
     }
+
     if (error) {
-        return <div>Error: {error.message}</div>; // Обработка ошибок
+        return <div>Произошла ошибка при загрузке данных!</div>; // Обработка ошибки
     }
 
     if (!data) {
-        return <div>No data available</div>; // Если данные все еще недоступны
+        return <div>No data available</div>; // Если данные отсутствуют
     }
-    console.log(data, "sdjkfjlkdsjfs");
-
-    const dispatch = useDispatch();
-    // const isSearchVisible = useSelector(selectisSearchVisible);
-
-    const handleClose = () => {
-        setInputTitle("");
-        dispatch(toggleIsSearchVisible());
-    };
 
     return (
         <div className={style.input__wrapper}>
@@ -55,26 +56,26 @@ const InputMenu = () => {
                     return (
                         <NavLink key={item.id} to={`/aboutFilm/${item.id}`}>
                             <li className={style.item}>
-                                    <div className={style.poster}>
-                                        {item.posterUrl ? (
-                                            <img className={style.poster__img} src={item.posterUrl} alt="Постер" />
-                                        ) : (
-                                            <img className={style.poster__img} src="/imgs/no3.webp" alt="filmNO" />
-                                        )}
-                                    </div>
+                                <div className={style.poster}>
+                                    {item.posterUrl ? (
+                                        <img className={style.poster__img} src={item.posterUrl} alt="Постер" />
+                                    ) : (
+                                        <img className={style.poster__img} src="/imgs/no3.webp" alt="filmNO" />
+                                    )}
+                                </div>
 
-                                    <div className={style.poster__infoWrapper}>
-                                        <div className={style.poster__info}>
-                                            <div className={style.rating} style={{ backgroundColor: ratingColor }}>
-                                                <img className={style.rating__star} src="/imgs/starRaiting.svg" alt="Рейтинг" />
-                                                <div className={style.rating__number}>{item.tmdbRating}</div>
-                                            </div>
-                                            <div className={style.year}>{item.releaseYear}</div>
-                                            <div className={style.genere}>{item.genres.join(",")}</div>
-                                            <div className={style.time}>{item.runtime} мин</div>
+                                <div className={style.poster__infoWrapper}>
+                                    <div className={style.poster__info}>
+                                        <div className={style.rating} style={{ backgroundColor: ratingColor }}>
+                                            <img className={style.rating__star} src="/imgs/starRaiting.svg" alt="Рейтинг" />
+                                            <div className={style.rating__number}>{item.tmdbRating}</div>
                                         </div>
-                                        <h3 className={style.poster__title}>{item.title}</h3>
+                                        <div className={style.year}>{item.releaseYear}</div>
+                                        <div className={style.genere}>{item.genres.join(",")}</div>
+                                        <div className={style.time}>{item.runtime} мин</div>
                                     </div>
+                                    <h3 className={style.poster__title}>{item.title}</h3>
+                                </div>
                             </li>
                         </NavLink>
                     );

@@ -11,7 +11,6 @@ const AboutFilm = () => {
     const movieId = Number(id);
 
     const { data, isFetching, error } = useMovieIdQuery(movieId);
-    console.log(data, "dataAboutFilm");
 
     if (isFetching) {
         return <Loading />; // Можно отобразить индикатор загрузки

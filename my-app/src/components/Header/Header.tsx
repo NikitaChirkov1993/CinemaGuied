@@ -16,9 +16,9 @@ const Header = () => {
     const navigate = useNavigate();
     const isSearchVisible = useSelector(selectisSearchVisible);
 
-    if (isSuccess) {
-        console.log(data, "dataPROFILE");
-    }
+    // if (isSuccess) {
+    //     console.log(data, "dataPROFILE");
+    // }
 
     const rootHeaderWrapper = [style.header__wrapper];
     if (isSearchVisible) {

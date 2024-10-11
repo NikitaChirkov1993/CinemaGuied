@@ -16,21 +16,22 @@ const AboutFilmPosterRandom = () => {
 
     const dispatch = useDispatch();
 
-    const { data:dataProfile,error:errorProfile  } = useUserPofileQuery();
+    const { data:dataProfile } = useUserPofileQuery();
 
-    const { data, refetch, isFetching, error} = useMovieRandomQuery();
+    const { data, refetch, isFetching, isError, isSuccess} = useMovieRandomQuery();
 
     if (isFetching) {
         return <Loading />; // Можно отобразить индикатор загрузки
     }
-    if (errorProfile) {
-        return <div> {errorProfile.massage}</div>;
-        // Обработка ошибок
+
+    if (isError) {
+        return <div> Произошла ошибка!выова</div>;
     }
 
     if (!data) {
         return <div>No data available</div>; // Если данные все еще недоступны
     }
+
 
 
 
