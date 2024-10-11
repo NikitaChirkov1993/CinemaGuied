@@ -15,7 +15,7 @@ const InputLogin: React.FC<InputLoginProps> = ({img,placeholder,type,isName,isLo
 
     };
 
-    const [isFocused, setIsFocused] = useState(false); // Состояние для фокуса
+    const [isFocused, setIsFocused] = useState(false);
 
     const rootClasses = [style.auth];
     const rootClassesImg = [style.img__auth];
@@ -32,8 +32,6 @@ const InputLogin: React.FC<InputLoginProps> = ({img,placeholder,type,isName,isLo
         rootClasses.push(style.activeFocus);
     }
 
-
-
     return (
         <div className={rootClasses.join(" ")}>
             <img className={rootClassesImg.join(" ")} src={img} alt="icon" />
@@ -43,8 +41,8 @@ const InputLogin: React.FC<InputLoginProps> = ({img,placeholder,type,isName,isLo
                 placeholder={placeholder}
                 className={style.input__auth}
                 type={type}
-                onFocus={()=> setIsFocused(true)} // Добавляем обработчик фокуса
-                onBlur={()=> setIsFocused(false)} // Добавляем обработчик потери фокуса
+                onFocus={()=> setIsFocused(true)}
+                onBlur={()=> setIsFocused(false)}
             />
         </div>
     );

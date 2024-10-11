@@ -2,13 +2,13 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useMovieRandomQuery, useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { toggleModal } from "../../redux/modalTrailerSlice";
+import { renderContent } from "../../utils/renderContent";
 import { getRatingColor } from "../../utils/utls";
 import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
 import BtnFavoritesNoAuth from "../ui/Buttons/BtnFavorites/BtnFavoritesNoAuth";
 import BtnRandom from "../ui/Buttons/BtnRandom/BtnRandom";
-import Loading from "../ui/Loading/Loading";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmPoster.module.css";
 
@@ -20,16 +20,13 @@ const AboutFilmPosterRandom = () => {
 
     const { data, refetch, isFetching, isError} = useMovieRandomQuery();
 
-    if (isFetching) {
-        return <Loading />;
-    }
-
-    if (isError) {
-        return <div> Произошла ошибка!выова</div>;
+    const content = renderContent(isFetching, isError);
+    if (content) {
+        return content;
     }
 
     if (!data) {
-        return <div>No data available</div>;
+        return <div>Нет доступных данных!</div>;
     }
 
     const ratingColor = getRatingColor(data.tmdbRating);

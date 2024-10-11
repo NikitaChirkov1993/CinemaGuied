@@ -1,15 +1,19 @@
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import { useDeleteFavoritesMutation } from "../../api/cinemaGuideApi";
-import Loading from "../ui/Loading/Loading";
+import { renderContent } from "../../utils/renderContent";
 import style from "./FavoritesFilm.module.css";
 
-const FavoritesFilm = ({ imges, id, refetchFavorites }: { imges: string; id: number;refetchFavorites: () => Promise<void>; }) => {
-    const movieId = Number(id);
-    const [deleteFilm, { isLoading: isLoadingDelete }] = useDeleteFavoritesMutation();
+interface FavoritesFilmProps {
+    imges: string;
+    id: number;
+    refetchFavorites: () => Promise<void>
+}
 
-    if (isLoadingDelete) {
-        return <Loading/>
-    }
+const FavoritesFilm:FC<FavoritesFilmProps> = ({ imges, id, refetchFavorites }) => {
+    const movieId = Number(id);
+    const [deleteFilm, { isLoading,isError}] = useDeleteFavoritesMutation();
+
     const handeleDelete = async () => {
         try {
             await deleteFilm(movieId).unwrap();
@@ -17,9 +21,12 @@ const FavoritesFilm = ({ imges, id, refetchFavorites }: { imges: string; id: num
         } catch (error) {
             console.error("Ошибка при удаление", error);
         }
-
-        // window.location.reload();
     };
+
+    const content = renderContent(isLoading, isError);
+    if (content) {
+        return content;
+    }
 
     return (
         <li className={style.item}>

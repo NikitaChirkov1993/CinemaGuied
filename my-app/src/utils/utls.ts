@@ -1,12 +1,10 @@
 
-
 export const firstLetter = (firstName?: string, firstSurname?: string) => {
     return {
-        firstName: firstName ? firstName[0] : "",  // Если firstName не undefined, вернуть первый символ, иначе пустую строку
-        firstSurname: firstSurname ? firstSurname[0] : ""  // Если firstSurname не undefined, вернуть первый символ, иначе пустую строку
+        firstName: firstName ? firstName[0] : "",
+        firstSurname: firstSurname ? firstSurname[0] : ""
     };
 };
-
 
 export const getRatingColor = (rating: number) => {
     if (rating >= 0 && rating <= 4.2) return "#c82020";

@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { dataAuth } from "../../../../data/dataAuth";
 import { openModalLogin } from "../../../../redux/modalLoginSlice";
 import { closeModalRegisterOk, selectModalRegisterOk } from "../../../../redux/modalRegisterOkSlice";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
-import style from "./ModalRegitserOK.module.css";
+import style from "./ModalAuth.module.css";
 
 const ModalRegitserOK = () => {
     const dispatch = useDispatch();

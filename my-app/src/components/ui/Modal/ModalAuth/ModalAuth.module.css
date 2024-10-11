@@ -7,7 +7,6 @@
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.7);
-    overflow-y: auto;
 }
 
 .myModal.active {
@@ -25,7 +24,6 @@
     width: 100%;
     max-width: 420px;
     margin: 0 20px;
-    overflow-y: auto;
 }
 
 
@@ -70,12 +68,27 @@
     }
   }
 
+  .massage {
+    color: #ff7575;
+  }
+
   /*Стили для Register*/
   .regitser__title {
     font-family: var(--font-family);
     font-weight: 700;
     font-size: 24px;
     line-height: 133%;
+    color: var(--content-black);
+    margin-bottom: 24px;
+  }
+
+  /*Стили для RegisterOK*/
+  .registerOK__text {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    text-align: center;
     color: var(--content-black);
     margin-bottom: 24px;
   }
@@ -87,15 +100,9 @@
     cursor: pointer;
   }
 
-  .massage {
-    color: #ff7575;
-  }
-
 @media only screen and (max-width:1024px) {
     .myModalContent {
 
         padding: 64px 20px 32px 20px;
-
     }
-
   }

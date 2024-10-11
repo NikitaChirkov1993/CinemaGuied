@@ -17,7 +17,7 @@ const Genere = () => {
     }
 
     if (!data) {
-        return <div>No data available</div>; // Если данные все еще недоступны
+        return <div>Нет доступных данных!</div>; // Если данные все еще недоступны
     }
 
     return (

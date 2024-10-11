@@ -68,6 +68,10 @@
     }
   }
 
+  .massage {
+    color: #ff7575;
+  }
+
   /*Стили для Register*/
   .regitser__title {
     font-family: var(--font-family);
@@ -100,7 +104,5 @@
     .myModalContent {
 
         padding: 64px 20px 32px 20px;
-
     }
-
   }

@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useMovieQuery } from "../../../../api/cinemaGuideApi";
 import { toggleIsSearchVisible } from "../../../../redux/isSearchVisible";
+import { renderContent } from "../../../../utils/renderContent";
 import { getRatingColor } from "../../../../utils/utls";
-import Loading from "../../Loading/Loading";
 import style from "./InputMenu.module.css";
 
 const InputMenu = () => {
@@ -16,7 +16,7 @@ const InputMenu = () => {
         setInputTitle(event.target.value);
     };
 
-    const { data, isLoading, error } = useMovieQuery({
+    const { data, isLoading, isError } = useMovieQuery({
         title: inputTitle ,
         count: 5,
     });
@@ -31,16 +31,13 @@ const InputMenu = () => {
         rootClassList.push(style.visible);
     }
 
-    if (isLoading) {
-        return <Loading />;
-    }
-
-    if (error) {
-        return <div>Произошла ошибка при загрузке данных!</div>;
+    const content = renderContent(isLoading, isError);
+    if (content) {
+        return content;
     }
 
     if (!data) {
-        return <div>No data available</div>;
+        return <div>Нет доступных данных!</div>;
     }
 
     return (

@@ -37,7 +37,6 @@ const Account = () => {
     //Избранные фильмы:
     const { data: datafavorites, isLoading:isLoadingfavorites, error:errorfavorites,refetch:refetchFavorites } = useGetFavoritesQuery();
     if (isLoadingfavorites) return <Loading />;
-    console.log(datafavorites,"datafavorites");
 
 
 

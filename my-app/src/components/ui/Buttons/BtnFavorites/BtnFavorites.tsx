@@ -7,7 +7,7 @@ interface BtnBrandActiveProps  {
 }
 
 const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
-    const favoritesID = id ? id.toString() : "";  // Проверяем, что id существует
+    const favoritesID = id ? id.toString() : "";
 
     const { data:dataGetFavorites,refetch:refetchGetFavorites } = useGetFavoritesQuery();
     const isFavoritesInitial = dataGetFavorites?.find((item) => item.id === id) ? true : false;
@@ -22,7 +22,7 @@ const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
             setIsFavorites((prev) => !prev);
             refetchGetFavorites();
         } catch (error) {
-            console.log(error);
+            console.log("Ошибка при добовление",error);
         }
     };
 
@@ -38,7 +38,6 @@ const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
         }
     };
 
-
     return (
         <>
         {!isFavorites ?
@@ -51,7 +50,6 @@ const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
             </button>
         }
     </>
-
 
     );
 };

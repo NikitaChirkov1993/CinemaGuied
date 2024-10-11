@@ -9,7 +9,7 @@ import { BodyUserRegister, IerrorMassage } from "../../../../types/types";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
 import InputRegister from "../../Inputs/InputAuth/InputRegister";
 import Loading from "../../Loading/Loading";
-import style from "./ModalRegister.module.css";
+import style from "./ModalAuth.module.css";
 
 const ModalRegister = () => {
     const dispatch = useDispatch();

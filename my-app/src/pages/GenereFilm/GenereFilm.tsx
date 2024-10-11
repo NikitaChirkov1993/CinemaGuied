@@ -8,11 +8,10 @@ import Loading from "../../components/ui/Loading/Loading";
 import style from "./GenereFilm.module.css";
 
 const GenereFilm = () => {
-    // const [count, setСount] = useState(10);
-    const [page, setPage] = useState<number>(0); // Текущая страница
+
+    const [page, setPage] = useState<number>(0);
 
     const { genere } = useParams();
-    console.log(page, "page");
 
     const { data, isLoading, refetch, error } = useMovieQuery({
         page: page,
@@ -27,7 +26,7 @@ const GenereFilm = () => {
     }
 
     if (!data) {
-        return <div>No data available</div>; // Если данные все еще недоступны
+        return <div>Нет доступных данных!</div>; // Если данные все еще недоступны
     }
 
     const plusPage = () => {

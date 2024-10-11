@@ -11,10 +11,9 @@
     border: 1px solid #ff7575;
 }
 .auth.activeFocus {
-    box-shadow: 0 0 5px 2px rgba(108, 230, 92, 0.5); /* Тень при фокусе */
-    outline: none; /* Убираем стандартное обрамление */
+    box-shadow: 0 0 5px 2px rgba(108, 230, 92, 0.5);
+    outline: none;
 }
-
 
 .img__auth {
     margin-right: 14px;
@@ -32,16 +31,10 @@
     line-height: 133%;
     color: var(--content-placeholder);
     transition: box-shadow 0.3s ease;
-
-
 }
-
-
 
 @media only screen and (max-width:1024px) {
     .img__auth {
         margin-right: 8px;
     }
-
-
   }

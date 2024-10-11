@@ -5,9 +5,9 @@ import { selectisSearchVisible, toggleIsSearchVisible } from "../../redux/isSear
 import { openModalLogin } from "../../redux/modalLoginSlice";
 import BtnMenu from "../ui/Buttons/BtnMenu/BtnMenu";
 import InputMenu from "../ui/Inputs/InputMenu/InputMenu";
-import ModalLogin from "../ui/Modal/ModalLogin/ModalLogin";
-import ModalRegister from "../ui/Modal/ModalRegister/ModalRegister";
-import ModalRegitserOK from "../ui/Modal/ModalRegitserOK/ModalRegitserOK";
+import ModalLogin from "../ui/Modal/ModalAuth/ModalLogin";
+import ModalRegister from "../ui/Modal/ModalAuth/ModalRegister";
+import ModalRegitserOK from "../ui/Modal/ModalAuth/ModalRegitserOK";
 import style from "./Header.module.css";
 
 const Header = () => {
@@ -25,7 +25,6 @@ const Header = () => {
     return (
         <header className={style.header}>
             <div className="container">
-                <div className={style.header__wrapper}>
                     <nav className={style.menu__desktop}>
                         <NavLink className={style.link} to={"/"}>
                             <div className={style.logo}>
@@ -38,18 +37,21 @@ const Header = () => {
                         <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/genere"}>
                             <BtnMenu>Жанры</BtnMenu>
                         </NavLink>
-                        <InputMenu /> {/* Условный рендеринг для InputMenu */}
+                        <InputMenu />
                         {!dataProfile ? (
                             <BtnMenu onClick={() => dispatch(openModalLogin())}>Войти</BtnMenu>
                         ) : (
                             <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
                                 <BtnMenu>{dataProfile?.name}</BtnMenu>
                             </NavLink>
-                        )}
+                    )}
+
                         <ModalLogin />
                         <ModalRegister />
                         <ModalRegitserOK />
+
                     </nav>
+
                     <nav className={style.menu__mobile}>
                         <div>
                             {!isSearchVisible && (
@@ -78,10 +80,9 @@ const Header = () => {
                             {isSearchVisible && <InputMenu />}
 
                             <ModalLogin />
-
                             <ModalRegister />
-
                             <ModalRegitserOK />
+
                             {!isSearchVisible && (
                                 <>
                                     {!dataProfile ? (
@@ -106,7 +107,6 @@ const Header = () => {
                         </div>
                     </nav>
                 </div>
-            </div>
         </header>
     );
 };

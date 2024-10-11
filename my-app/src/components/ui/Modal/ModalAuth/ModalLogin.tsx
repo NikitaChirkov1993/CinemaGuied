@@ -3,23 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useUserLoginMutation } from "../../../../api/cinemaGuideApi";
 import { dataAuth } from "../../../../data/dataAuth";
-import { isAuthfalse } from "../../../../redux/isAuthenticatedSlice";
 import { closeModalLogin, selectModalLogin } from "../../../../redux/modalLoginSlice";
 import { openModalRegister } from "../../../../redux/modalRegisterSlice";
 import { BodyUserLogin, IerrorMassageLogin } from "../../../../types/types";
 import BtnBrandActive from "../../Buttons/BtnBrandActive/BtnBrandActive";
 import InputLogin from "../../Inputs/InputAuth/InputLogin";
 import Loading from "../../Loading/Loading";
-import style from "./ModalLogin.module.css";
+import style from "./ModalAuth.module.css";
 
 const ModalLogin = () => {
     const isModalLogin = useSelector(selectModalLogin);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [userLogin, { data, isLoading, isSuccess }] = useUserLoginMutation();
-
-
+    const [userLogin, { isLoading, isSuccess }] = useUserLoginMutation();
 
     const [isLogin, setIsLogin] = useState<BodyUserLogin>({
         email: "",
@@ -44,8 +41,6 @@ const ModalLogin = () => {
             }));
 
         } else {
-            // dispatch(closeModalLogin());
-            // navigate("/account");
             try {
                 await userLogin(isLogin).unwrap();
             } catch (error) {
@@ -63,7 +58,6 @@ const ModalLogin = () => {
     useEffect(() => {
         if (isSuccess) {
             dispatch(closeModalLogin());
-            // dispatch(isAuthfalse());
             navigate("/account");
             setIsLogin({
                 email: "",
@@ -81,7 +75,6 @@ const ModalLogin = () => {
     if (isLoading) {
         return <Loading />;
     }
-
 
     const rootClasses = [style.myModal];
     if (isModalLogin) {

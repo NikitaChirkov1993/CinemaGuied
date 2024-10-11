@@ -16,7 +16,6 @@ interface AboutFilmPosterProps {
 
 const AboutFilmPoster:FC<AboutFilmPosterProps> = ({ dataMovieId }) => {
     const dispatch = useDispatch();
-    console.log(dataMovieId,"dataMovieId");
 
 
     const { data:dataProfile  } = useUserPofileQuery();

@@ -15,7 +15,7 @@ const InputRegister: React.FC<InputAuthProps> = ({ img, type, placeholder, auth,
 
     };
 
-    const [isFocused, setIsFocused] = useState(false); // Состояние для фокуса
+    const [isFocused, setIsFocused] = useState(false);
 
     const rootClasses = [style.auth];
     const rootClassesImg = [style.img__auth];
@@ -44,8 +44,8 @@ const InputRegister: React.FC<InputAuthProps> = ({ img, type, placeholder, auth,
                 placeholder={placeholder}
                 className={style.input__auth}
                 type={type}
-                onFocus={()=> setIsFocused(true)} // Добавляем обработчик фокуса
-                onBlur={()=> setIsFocused(false)} // Добавляем обработчик потери фокуса
+                onFocus={()=> setIsFocused(true)}
+                onBlur={()=> setIsFocused(false)}
             />
         </div>
     );
