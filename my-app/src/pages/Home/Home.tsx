@@ -4,9 +4,8 @@ import { useMovieTop10Query } from "../../api/cinemaGuideApi";
 import AboutFilmPosterRandom from "../../components/AboutFilmPoster/AboutFilmPosterRandom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import Loading from "../../components/ui/Loading/Loading";
-import style from "./Home.module.css";
 import { renderContent } from "../../utils/renderContent";
+import style from "./Home.module.css";
 
 const Home = () => {
 
