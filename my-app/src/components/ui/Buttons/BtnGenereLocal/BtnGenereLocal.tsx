@@ -1,6 +1,7 @@
+import { FC } from "react";
 import style from "./BtnGenereLocal.module.css";
 
-const BtnGenereLocal = () => {
+const BtnGenereLocal:FC = () => {
     return ( <button className={style.btn}>Показать ещё</button> );
 }
 

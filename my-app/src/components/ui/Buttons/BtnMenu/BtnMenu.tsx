@@ -7,7 +7,6 @@ interface BtnMenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const BtnMenu: FC<BtnMenuProps> = ({ children, ...props }) => {
 
-
     return (
         <button className={style.btn} {...props} type="button">
             {children}

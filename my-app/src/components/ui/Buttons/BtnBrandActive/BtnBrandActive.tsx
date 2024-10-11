@@ -1,6 +1,11 @@
+import { ButtonHTMLAttributes, FC } from "react";
 import style from "./BtnBrandActive.module.css";
 
-const BtnBrandActive = ({children, ...props}) => {
+interface BtnBrandActiveProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    children: React.ReactNode;
+}
+
+const BtnBrandActive: FC<BtnBrandActiveProps> = ({children, ...props}) => {
     return (
         <button {...props} className={style.btn__trailer}>
             {children}

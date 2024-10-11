@@ -16,9 +16,8 @@ const InputMenu = () => {
         setInputTitle(event.target.value);
     };
 
-    // Хук useMovieQuery должен вызываться всегда, независимо от состояния inputTitle
     const { data, isLoading, error } = useMovieQuery({
-        title: inputTitle , // Обеспечиваем, что запрос выполняется даже при пустом inputTitle
+        title: inputTitle ,
         count: 5,
     });
 
@@ -33,15 +32,15 @@ const InputMenu = () => {
     }
 
     if (isLoading) {
-        return <Loading />; // Показываем индикатор загрузки
+        return <Loading />;
     }
 
     if (error) {
-        return <div>Произошла ошибка при загрузке данных!</div>; // Обработка ошибки
+        return <div>Произошла ошибка при загрузке данных!</div>;
     }
 
     if (!data) {
-        return <div>No data available</div>; // Если данные отсутствуют
+        return <div>No data available</div>;
     }
 
     return (

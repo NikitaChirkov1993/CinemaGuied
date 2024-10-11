@@ -1,6 +1,9 @@
+import { ButtonHTMLAttributes, FC } from "react";
 import style from "./BtnFavorites.module.css";
 
-const BtnFavoritesNoAuth = ({...props}) => {
+interface BtnFavoritesNoAuthProps extends ButtonHTMLAttributes<HTMLButtonElement> { }
+
+const BtnFavoritesNoAuth:FC<BtnFavoritesNoAuthProps> = ({...props}) => {
     return (
         <button {...props} className={style.favorites}>
             <img src="/imgs/on=false.svg" alt="Не в избранном" />

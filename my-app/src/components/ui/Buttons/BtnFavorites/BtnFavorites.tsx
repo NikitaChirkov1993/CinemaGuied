@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useDeleteFavoritesMutation, useGetFavoritesQuery, usePostFavoritesMutation } from "../../../../api/cinemaGuideApi";
 import style from "./BtnFavorites.module.css";
 
-const BtnFavorites = ({ id }: { id: number  }) => {
+interface BtnBrandActiveProps  {
+    id:number
+}
+
+const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
     const favoritesID = id ? id.toString() : "";  // Проверяем, что id существует
 
     const { data:dataGetFavorites,refetch:refetchGetFavorites } = useGetFavoritesQuery();
@@ -10,7 +14,7 @@ const BtnFavorites = ({ id }: { id: number  }) => {
     const [isFavorites, setIsFavorites] = useState(isFavoritesInitial);
 
     //ДОБОВЛЕНИЕ ФИЛЬМА:
-    const [postFavorites, { isLoading:isLoadingPostFavorites }] = usePostFavoritesMutation();
+    const [postFavorites,] = usePostFavoritesMutation();
     const handleAddFavorites = async () => {
 
         try {
@@ -23,7 +27,7 @@ const BtnFavorites = ({ id }: { id: number  }) => {
     };
 
     //УДАЛЕНИЕ ФИЛЬМА:
-    const [deleteFilm, { isLoading: isLoadingDelete }] = useDeleteFavoritesMutation();
+    const [deleteFilm, ] = useDeleteFavoritesMutation();
     const handeleDeleteFavorites = async () => {
         try {
             await deleteFilm(id).unwrap();
