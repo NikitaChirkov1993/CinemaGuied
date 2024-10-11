@@ -4,7 +4,7 @@ import { useMovieQuery } from "../../api/cinemaGuideApi";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import BtnBrandActive from "../../components/ui/Buttons/BtnBrandActive/BtnBrandActive";
-import Loading from "../../components/ui/Loading/Loading";
+import { renderContent } from "../../utils/renderContent";
 import style from "./GenereFilm.module.css";
 
 const GenereFilm = () => {
@@ -13,25 +13,24 @@ const GenereFilm = () => {
 
     const { genere } = useParams();
 
-    const { data, isLoading, refetch, error } = useMovieQuery({
+    const { data, isLoading, refetch, isError } = useMovieQuery({
         page: page,
         genre: genere,
         count:50,
     });
-    if (isLoading) {
-        return <Loading />; // Можно отобразить индикатор загрузки
-    }
-    if (error) {
-        return <div>Error: {error.message}</div>; // Обработка ошибок
+
+    const content = renderContent(isLoading, isError);
+    if (content) {
+        return content;
     }
 
     if (!data) {
-        return <div>Нет доступных данных!</div>; // Если данные все еще недоступны
+        return <div>Нет доступных данных!</div>;
     }
 
     const plusPage = () => {
         setPage((prevPage) => prevPage + 1);
-        refetch(); // Перезапрашиваем данные
+        refetch();
     };
 
     const minusPage = () => {

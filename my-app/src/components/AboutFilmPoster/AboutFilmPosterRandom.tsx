@@ -58,7 +58,7 @@ const AboutFilmPosterRandom = () => {
                 </div>
                 <h2 className={style.title}>{data?.title}</h2>
                 <p className={style.description}>{data?.plot}</p>
-                <ModalTrailer movie={data?.trailerYouTubeId}  />
+                <ModalTrailer movieId={data?.trailerYouTubeId}  />
 
                 <div className={style.btn__wrapper}>
                     <div className={style.btn__trailer}>

@@ -24,7 +24,6 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     gap:40px;
     height: 100%;
     border: 1px solid rgba(255, 255, 255, 0.25);

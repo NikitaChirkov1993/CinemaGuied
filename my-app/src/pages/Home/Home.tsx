@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Loading from "../../components/ui/Loading/Loading";
 import style from "./Home.module.css";
+import { renderContent } from "../../utils/renderContent";
 
 const Home = () => {
 
@@ -18,17 +19,15 @@ const Home = () => {
         }
       }, []);
 
-    const { data, isFetching, error } = useMovieTop10Query();
-    console.log(data);
-    if (isFetching) {
-        return <Loading />; // Можно отобразить индикатор загрузки
-    }
-    if (error) {
-        return <div>Error: {error.message}</div>; // Обработка ошибок
+    const { data, isFetching, isError } = useMovieTop10Query();
+
+    const content = renderContent(isFetching, isError);
+    if (content) {
+        return content;
     }
 
     if (!data) {
-        return <div>Нет доступных данных!</div>; // Если данные все еще недоступны
+        return <div>Нет доступных данных!</div>;
     }
 
     return (

@@ -16,12 +16,12 @@ const Account = () => {
 
     const { data:dataProfile } = useUserPofileQuery();
 
-    const [userLogout, { isSuccess: isSuccessLogout, isLoading: isLoadingLogout }] = useUserLogoutMutation();
+    const [userLogout, { isLoading: isLoadingLogout }] = useUserLogoutMutation();
 
     const handleLogout = async () => {
         try {
-            await userLogout().unwrap(); // Выполняем запрос
-            navigate("/"); // Перенаправляем на главную страницу
+            await userLogout().unwrap();
+            navigate("/");
             window.location.reload();
         } catch (error) {
             console.error("Ошибка при выходе из аккаунта:", error);
@@ -37,7 +37,6 @@ const Account = () => {
     //Избранные фильмы:
     const { data: datafavorites, isLoading:isLoadingfavorites, error:errorfavorites,refetch:refetchFavorites } = useGetFavoritesQuery();
     if (isLoadingfavorites) return <Loading />;
-
 
 
     return (

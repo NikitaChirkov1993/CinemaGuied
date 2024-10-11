@@ -49,7 +49,7 @@ const AboutFilmPoster:FC<AboutFilmPosterProps> = ({ dataMovieId }) => {
                 </div>
                 <h2 className={style.title}>{dataMovieId.title}</h2>
                 <p className={style.description}>{dataMovieId.plot}</p>
-                <ModalTrailer movie={dataMovieId.trailerYouTubeId} />
+                <ModalTrailer movieId={dataMovieId.trailerYouTubeId} />
 
                 <div className={style.btn__wrapper_2}>
                     <div className={style.btn__trailer_2}>

@@ -1,3 +1,4 @@
+import { QueryActionCreatorResult } from "@reduxjs/toolkit/query";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import { useDeleteFavoritesMutation } from "../../api/cinemaGuideApi";
@@ -7,7 +8,7 @@ import style from "./FavoritesFilm.module.css";
 interface FavoritesFilmProps {
     imges: string;
     id: number;
-    refetchFavorites: () => Promise<void>
+    refetchFavorites: () => QueryActionCreatorResult<any>
 }
 
 const FavoritesFilm:FC<FavoritesFilmProps> = ({ imges, id, refetchFavorites }) => {

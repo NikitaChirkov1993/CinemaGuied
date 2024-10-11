@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal, selectModalTrailer } from "../../../../redux/modalTrailerSlice";
 import style from "./ModalTrailer.module.css";
 
-const ModalTrailer = ({ movie  }) => {
+const ModalTrailer = ({ movieId }:{movieId:string}) => {
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
-    const videoSrc = `https://www.youtube.com/embed/${movie}?enablejsapi=1`; // Исходная ссылка на видео
+    const videoSrc = `https://www.youtube.com/embed/${movieId}?enablejsapi=1`;
 
     const dispatch = useDispatch();
     const isModalOpen = useSelector(selectModalTrailer);
@@ -13,20 +13,20 @@ const ModalTrailer = ({ movie  }) => {
     const handleClose = () => {
         dispatch(closeModal());
         if (iframeRef.current) {
-            iframeRef.current.src = ""; // Останавливаем видео
+            iframeRef.current.src = "";
         }
     };
 
     const handleOpen = () => {
         if (iframeRef.current) {
-            iframeRef.current.src = videoSrc; // Устанавливаем src при открытии
+            iframeRef.current.src = videoSrc;
         }
     };
 
     const rootClasses = [style.myModal];
     if (isModalOpen) {
         rootClasses.push(style.active);
-        handleOpen(); // Устанавливаем src, когда модальное окно открывается
+        handleOpen();
     }
 
     return (

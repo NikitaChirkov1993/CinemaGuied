@@ -3,25 +3,22 @@ import { useMovieIdQuery } from "../../api/cinemaGuideApi";
 import AboutFilmPoster from "../../components/AboutFilmPoster/AboutFilmPoster";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import Loading from "../../components/ui/Loading/Loading";
+import { renderContent } from "../../utils/renderContent";
 import style from "./AboutFilm.module.css";
 
 const AboutFilm = () => {
     const { id } = useParams<{ id: string }>();
     const movieId = Number(id);
 
-    const { data, isFetching, error } = useMovieIdQuery(movieId);
+    const { data, isFetching, isError } = useMovieIdQuery(movieId);
 
-    if (isFetching) {
-        return <Loading />; // Можно отобразить индикатор загрузки
-    }
-    if (error) {
-        return <div>Error: {error.message}</div>;
-        // Обработка ошибок
+    const content = renderContent(isFetching, isError);
+    if (content) {
+        return content;
     }
 
     if (!data) {
-        return <div>Нет доступных данных!</div>; // Если данные все еще недоступны
+        return <div>Нет доступных данных!</div>;
     }
 
     const dataAboutFilm = [

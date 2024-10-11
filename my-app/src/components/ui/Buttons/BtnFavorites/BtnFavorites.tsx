@@ -1,12 +1,9 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { useDeleteFavoritesMutation, useGetFavoritesQuery, usePostFavoritesMutation } from "../../../../api/cinemaGuideApi";
+import Loading from "../../Loading/Loading";
 import style from "./BtnFavorites.module.css";
 
-interface BtnBrandActiveProps  {
-    id:number
-}
-
-const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
+const BtnFavorites = ({ id }:{id:number}) => {
     const favoritesID = id ? id.toString() : "";
 
     const { data:dataGetFavorites,refetch:refetchGetFavorites } = useGetFavoritesQuery();
@@ -14,7 +11,7 @@ const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
     const [isFavorites, setIsFavorites] = useState(isFavoritesInitial);
 
     //ДОБОВЛЕНИЕ ФИЛЬМА:
-    const [postFavorites,] = usePostFavoritesMutation();
+    const [postFavorites,{isLoading:isLoadingpostFavorites}] = usePostFavoritesMutation();
     const handleAddFavorites = async () => {
 
         try {
@@ -27,7 +24,7 @@ const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
     };
 
     //УДАЛЕНИЕ ФИЛЬМА:
-    const [deleteFilm, ] = useDeleteFavoritesMutation();
+    const [deleteFilm,{isLoading:isLoadingdeleteFilm} ] = useDeleteFavoritesMutation();
     const handeleDeleteFavorites = async () => {
         try {
             await deleteFilm(id).unwrap();
@@ -38,9 +35,13 @@ const BtnFavorites: FC<BtnBrandActiveProps> = ({ id }) => {
         }
     };
 
+    if (isLoadingpostFavorites || isLoadingdeleteFilm) {
+        return <Loading/>
+    }
+
     return (
         <>
-        {!isFavorites ?
+            {!isFavorites ?
             <button className={style.favorites} onClick={handleAddFavorites}>
                  <img src="/imgs/on=false.svg" alt="Не в избранном" />
             </button>
