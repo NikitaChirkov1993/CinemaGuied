@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { cinemaGuideApi } from "../api/cinemaGuideApi";
 import { isAuthReducer } from "./isAuthenticatedSlice";
+import { isSearchVisibleReducer } from "./isSearchVisible";
 import { modalLoginReducer } from "./modalLoginSlice";
 import { modalRegisterOkReducer } from "./modalRegisterOkSlice";
 import { modalRegisterReducer } from "./modalRegisterSlice";
@@ -12,7 +13,8 @@ export const store = configureStore({
         modalLogin: modalLoginReducer,
         modalRegister: modalRegisterReducer,
         modalRegisterOk: modalRegisterOkReducer,
-        isAuth:isAuthReducer,
+        isAuth: isAuthReducer,
+        isSearchVisible:isSearchVisibleReducer,
         [cinemaGuideApi.reducerPath]: cinemaGuideApi.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cinemaGuideApi.middleware),

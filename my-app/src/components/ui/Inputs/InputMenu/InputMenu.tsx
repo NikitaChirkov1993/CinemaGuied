@@ -1,11 +1,13 @@
 import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useMovieQuery } from "../../../../api/cinemaGuideApi";
+import { toggleIsSearchVisible } from "../../../../redux/isSearchVisible";
 import { getRatingColor } from "../../../../utils/utls";
 import Loading from "../../Loading/Loading";
 import style from "./InputMenu.module.css";
 
-const InputMenu = ({ setIsSearchVisible, isSearchVisible }) => {
+const InputMenu = () => {
     const [inputTitle, setInputTitle] = useState<string>("");
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,9 +35,12 @@ const InputMenu = ({ setIsSearchVisible, isSearchVisible }) => {
     }
     console.log(data, "sdjkfjlkdsjfs");
 
+    const dispatch = useDispatch();
+    // const isSearchVisible = useSelector(selectisSearchVisible);
+
     const handleClose = () => {
         setInputTitle("");
-        setIsSearchVisible(!isSearchVisible);
+        dispatch(toggleIsSearchVisible());
     };
 
     return (

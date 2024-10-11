@@ -55,7 +55,6 @@ const AboutFilmPoster = ({ data }) => {
                             :
                             <BtnFavorites id={data?.id} />
                         }
-                        {/* {dataProfile && <BtnFavorites id={data?.id} />} */}
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUserPofileQuery } from "../../api/cinemaGuideApi";
+import { selectisSearchVisible, toggleIsSearchVisible } from "../../redux/isSearchVisible";
 import { openModalLogin } from "../../redux/modalLoginSlice";
 import BtnMenu from "../ui/Buttons/BtnMenu/BtnMenu";
 import InputMenu from "../ui/Inputs/InputMenu/InputMenu";
@@ -13,14 +13,13 @@ import style from "./Header.module.css";
 const Header = () => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, refetch, isSuccess } = useUserPofileQuery();
-    // const selectorIsAuth = useSelector(selectisAuth);
     const navigate = useNavigate();
+    const isSearchVisible = useSelector(selectisSearchVisible);
 
     if (isSuccess) {
         console.log(data, "dataPROFILE");
     }
 
-    const [isSearchVisible, setIsSearchVisible] = useState(false); // Состояние для видимости InputMenu
     const rootHeaderWrapper = [style.header__wrapper];
     if (isSearchVisible) {
         rootHeaderWrapper.push(style.center)
@@ -67,16 +66,12 @@ const Header = () => {
                         )}
 
                         {!isSearchVisible && (
-                            <div onClick={() => setIsSearchVisible(!isSearchVisible)} className={style.icon}>
+                            <div onClick={()=>dispatch(toggleIsSearchVisible())} className={style.icon}>
                                 <img src="/imgs/searchmenu.svg" alt="Поиск" />
                             </div>
                         )}
 
-                        {isSearchVisible &&
-                            <InputMenu
-                                setIsSearchVisible={setIsSearchVisible} isSearchVisible={isSearchVisible}
-                            />
-                        }
+                        {isSearchVisible && <InputMenu/>}
 
                         <ModalLogin />
 
