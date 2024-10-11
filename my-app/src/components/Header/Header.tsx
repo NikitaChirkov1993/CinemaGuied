@@ -12,32 +12,26 @@ import style from "./Header.module.css";
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { data, isLoading, isError, refetch, isSuccess } = useUserPofileQuery();
     const navigate = useNavigate();
     const isSearchVisible = useSelector(selectisSearchVisible);
 
-    // if (isSuccess) {
-    //     console.log(data, "dataPROFILE");
-    // }
+    const { data:dataProfile} = useUserPofileQuery();
 
-    const rootHeaderWrapper = [style.header__wrapper];
+    const rootMobileInfo = [style.menu__mobile_info];
     if (isSearchVisible) {
-        rootHeaderWrapper.push(style.center)
+        rootMobileInfo.push(style.center);
     }
 
     return (
         <header className={style.header}>
             <div className="container">
-                <div className={rootHeaderWrapper.join(" ")}>
-                    {!isSearchVisible && (
+                <div className={style.header__wrapper}>
+                    <nav className={style.menu__desktop}>
                         <NavLink className={style.link} to={"/"}>
                             <div className={style.logo}>
                                 <img className={style.logo__img} src="/imgs/logo.svg" alt="логотип" />
                             </div>
                         </NavLink>
-                    )}
-
-                    <nav className={style.menu__desktop}>
                         <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/"}>
                             <BtnMenu>Главная</BtnMenu>
                         </NavLink>
@@ -45,11 +39,11 @@ const Header = () => {
                             <BtnMenu>Жанры</BtnMenu>
                         </NavLink>
                         <InputMenu /> {/* Условный рендеринг для InputMenu */}
-                        {!data ? (
+                        {!dataProfile ? (
                             <BtnMenu onClick={() => dispatch(openModalLogin())}>Войти</BtnMenu>
                         ) : (
                             <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
-                                <BtnMenu>{data?.name}</BtnMenu>
+                                <BtnMenu>{dataProfile?.name}</BtnMenu>
                             </NavLink>
                         )}
                         <ModalLogin />
@@ -57,48 +51,59 @@ const Header = () => {
                         <ModalRegitserOK />
                     </nav>
                     <nav className={style.menu__mobile}>
-                        {!isSearchVisible && (
-                            <NavLink className={style.link} to={"/genere"}>
-                                <div className={style.icon}>
-                                    <img src="/imgs/genres.svg" alt="Жанры" />
+                        <div>
+                            {!isSearchVisible && (
+                                <NavLink className={style.link} to={"/"}>
+                                    <div className={style.logo}>
+                                        <img className={style.logo__img} src="/imgs/logo.svg" alt="логотип" />
+                                    </div>
+                                </NavLink>
+                            )}
+                        </div>
+                        <div className={rootMobileInfo.join(" ")}>
+                            {!isSearchVisible && (
+                                <NavLink className={style.link} to={"/genere"}>
+                                    <div className={style.icon}>
+                                        <img src="/imgs/genres.svg" alt="Жанры" />
+                                    </div>
+                                </NavLink>
+                            )}
+
+                            {!isSearchVisible && (
+                                <div onClick={() => dispatch(toggleIsSearchVisible())} className={style.icon}>
+                                    <img src="/imgs/searchmenu.svg" alt="Поиск" />
                                 </div>
-                            </NavLink>
-                        )}
+                            )}
 
-                        {!isSearchVisible && (
-                            <div onClick={()=>dispatch(toggleIsSearchVisible())} className={style.icon}>
-                                <img src="/imgs/searchmenu.svg" alt="Поиск" />
-                            </div>
-                        )}
+                            {isSearchVisible && <InputMenu />}
 
-                        {isSearchVisible && <InputMenu/>}
+                            <ModalLogin />
 
-                        <ModalLogin />
+                            <ModalRegister />
 
-                        <ModalRegister />
-
-                        <ModalRegitserOK />
-                        {!isSearchVisible && (
-                            <>
-                                {!data ? (
-                                    <div
-                                        onClick={() => {
-                                            dispatch(openModalLogin());
-                                        }}
-                                        className={style.icon}>
-                                        <img src="/imgs/key.svg" alt="Войти" />
-                                    </div>
-                                ) : (
-                                    <div
-                                        onClick={() => {
-                                            navigate("/account");
-                                        }}
-                                        className={style.icon}>
-                                        <img src="/imgs/user.svg" alt="Аккаунт" />
-                                    </div>
-                                )}
-                            </>
-                        )}
+                            <ModalRegitserOK />
+                            {!isSearchVisible && (
+                                <>
+                                    {!dataProfile ? (
+                                        <div
+                                            onClick={() => {
+                                                dispatch(openModalLogin());
+                                            }}
+                                            className={style.icon}>
+                                            <img src="/imgs/key.svg" alt="Войти" />
+                                        </div>
+                                    ) : (
+                                        <div
+                                            onClick={() => {
+                                                navigate("/account");
+                                            }}
+                                            className={style.icon}>
+                                            <img src="/imgs/user.svg" alt="Аккаунт" />
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </div>
                     </nav>
                 </div>
             </div>

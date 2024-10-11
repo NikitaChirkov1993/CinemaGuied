@@ -1,6 +1,8 @@
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { toggleModal } from "../../redux/modalTrailerSlice";
+import { Movie } from "../../types/types";
 import { getRatingColor } from "../../utils/utls";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
@@ -8,12 +10,18 @@ import BtnFavoritesNoAuth from "../ui/Buttons/BtnFavorites/BtnFavoritesNoAuth";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmPoster.module.css";
 
-const AboutFilmPoster = ({ data }) => {
+interface AboutFilmPosterProps {
+    dataMovieId: Movie;
+}
+
+const AboutFilmPoster:FC<AboutFilmPosterProps> = ({ dataMovieId }) => {
     const dispatch = useDispatch();
+    console.log(dataMovieId,"dataMovieId");
+
 
     const { data:dataProfile  } = useUserPofileQuery();
 
-    const ratingColor = getRatingColor(data.tmdbRating);
+    const ratingColor = getRatingColor(dataMovieId.tmdbRating);
 
     const handleClickNOisFavorites = () => {
         if (!dataProfile) {
@@ -27,22 +35,22 @@ const AboutFilmPoster = ({ data }) => {
             <div className={style.info__rating}>
                     <div className={style.rating} style={{ backgroundColor: ratingColor }}>
                         <img className={style.rating__star} src="/imgs/starRaiting.svg" alt="рейтинг" />
-                        <div className={style.rating__number}>{data.tmdbRating}</div>
+                        <div className={style.rating__number}>{dataMovieId.tmdbRating}</div>
                     </div>
 
                     <div className={style.info}>
-                        <span>{data.releaseYear} year&nbsp; </span>
+                        <span>{dataMovieId.releaseYear} year&nbsp; </span>
                         <div>
-                            {data.genres.map((item, index) => (
+                            {dataMovieId.genres.map((item, index) => (
                                 <span key={index}>({item})</span>
                             ))}
                         </div>
-                        <div>&nbsp;{data.runtime} min</div>
+                        <div>&nbsp;{dataMovieId.runtime} min</div>
                     </div>
                 </div>
-                <h2 className={style.title}>{data.title}</h2>
-                <p className={style.description}>{data.plot}</p>
-                <ModalTrailer movie={data.trailerYouTubeId} />
+                <h2 className={style.title}>{dataMovieId.title}</h2>
+                <p className={style.description}>{dataMovieId.plot}</p>
+                <ModalTrailer movie={dataMovieId.trailerYouTubeId} />
 
                 <div className={style.btn__wrapper_2}>
                     <div className={style.btn__trailer_2}>
@@ -53,12 +61,12 @@ const AboutFilmPoster = ({ data }) => {
                     {!dataProfile ?
                             <BtnFavoritesNoAuth onClick={handleClickNOisFavorites} />
                             :
-                            <BtnFavorites id={data?.id} />
+                            <BtnFavorites id={dataMovieId?.id} />
                         }
                     </div>
                 </div>
             </div>
-            <div className={style.info__background} style={{ backgroundImage: `url(${data.backdropUrl})` }}></div>
+            <div className={style.info__background} style={{ backgroundImage: `url(${dataMovieId.backdropUrl})` }}></div>
         </div>
     );
 };

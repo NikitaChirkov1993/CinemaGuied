@@ -7,7 +7,7 @@ import BtnAboutFilm from "../ui/Buttons/BtnAboutFilm/BtnAboutFilm";
 import BtnBrandActive from "../ui/Buttons/BtnBrandActive/BtnBrandActive";
 import BtnFavorites from "../ui/Buttons/BtnFavorites/BtnFavorites";
 import BtnFavoritesNoAuth from "../ui/Buttons/BtnFavorites/BtnFavoritesNoAuth";
-import BtnMix from "../ui/Buttons/BtnMix/BtnMix";
+import BtnRandom from "../ui/Buttons/BtnRandom/BtnRandom";
 import Loading from "../ui/Loading/Loading";
 import ModalTrailer from "../ui/Modal/ModalTrailer/ModalTrailer";
 import style from "./AboutFilmPoster.module.css";
@@ -18,10 +18,10 @@ const AboutFilmPosterRandom = () => {
 
     const { data:dataProfile } = useUserPofileQuery();
 
-    const { data, refetch, isFetching, isError, isSuccess} = useMovieRandomQuery();
+    const { data, refetch, isFetching, isError} = useMovieRandomQuery();
 
     if (isFetching) {
-        return <Loading />; // Можно отобразить индикатор загрузки
+        return <Loading />;
     }
 
     if (isError) {
@@ -29,17 +29,10 @@ const AboutFilmPosterRandom = () => {
     }
 
     if (!data) {
-        return <div>No data available</div>; // Если данные все еще недоступны
+        return <div>No data available</div>;
     }
 
-
-
-
     const ratingColor = getRatingColor(data.tmdbRating);
-
-    const handleMovieMix = () => {
-        refetch();
-    };
 
     const handleClickNOisFavorites = () => {
         if (!dataProfile) {
@@ -85,8 +78,7 @@ const AboutFilmPosterRandom = () => {
                             :
                             <BtnFavorites id={data?.id} />
                         }
-                         {/* {dataProfile && <BtnFavorites id={data?.id} />} */}
-                         <BtnMix onClick={handleMovieMix} />
+                         <BtnRandom onClick={()=>  refetch()} />
                     </div>
                 </div>
             </div>
