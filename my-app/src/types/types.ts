@@ -71,8 +71,6 @@ export interface IerrorMassageLogin {
     flagGlobal2: boolean;
 }
 
-
-
 export interface InputAuthProps {
     img: string;
     placeholder: string;
