@@ -15,13 +15,13 @@ const Footer = () => {
                     </div>
                     <div className={style.wrapper__icon}>
                         <a href="https://vk.com/id60207388" target="blank" className={style.icon}>
-                            <img src="/imgs/vk.svg" alt="" />
+                            <img src="/imgs/vk.svg" alt="vk" />
                         </a>
                         <a href="https://www.youtube.com/" target="blank" className={style.icon}>
-                            <img src="/imgs/youtube.svg" alt="" />
+                            <img src="/imgs/youtube.svg" alt="youtube" />
                         </a>
                         <a href="https://t.me/NikitaChirkovSerg" target="blank" className={style.icon}>
-                            <img src="/imgs/telegram.svg" alt="" />
+                            <img src="/imgs/telegram.svg" alt="telegram" />
                         </a>
                     </div>
                 </div>
