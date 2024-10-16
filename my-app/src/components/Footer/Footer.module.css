@@ -43,9 +43,6 @@
     .wrapper__text {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .wrapper__text {
         margin-bottom: 32px;
     }
   }
