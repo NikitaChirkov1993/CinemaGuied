@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useUserPofileQuery } from "../../api/cinemaGuideApi";
 import { selectisSearchVisible, toggleIsSearchVisible } from "../../redux/isSearchVisible";
 import { openModalLogin } from "../../redux/modalLoginSlice";
