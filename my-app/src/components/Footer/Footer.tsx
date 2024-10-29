@@ -13,7 +13,7 @@ const Footer = () => {
                             <p className={style.text2}>Все права защищены </p>
                         </div>
                     </div>
-                    <div className={style.wrapper__icon}>
+                    {/* <div className={style.wrapper__icon}>
                         <a href="https://vk.com/id60207388" target="blank" className={style.icon}>
                             <img src="/imgs/vk.svg" alt="vk" />
                         </a>
@@ -23,7 +23,7 @@ const Footer = () => {
                         <a href="https://t.me/NikitaChirkovSerg" target="blank" className={style.icon}>
                             <img src="/imgs/telegram.svg" alt="telegram" />
                         </a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>
