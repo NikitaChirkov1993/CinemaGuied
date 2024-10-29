@@ -12,7 +12,6 @@ import style from "./Header.module.css";
 
 const Header = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const isSearchVisible = useSelector(selectisSearchVisible);
 
     const { data:dataProfile} = useUserPofileQuery();
@@ -64,7 +63,7 @@ const Header = () => {
                         </div>
                         <div className={rootMobileInfo.join(" ")}>
                             {!isSearchVisible && (
-                                <NavLink className={style.link} to={"/genere"}>
+                                <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/genere"}>
                                     <div className={style.icon}>
                                         <img src="/imgs/genres.svg" alt="Жанры" />
                                     </div>
@@ -93,14 +92,14 @@ const Header = () => {
                                             className={style.icon}>
                                             <img src="/imgs/key.svg" alt="Войти" />
                                         </div>
-                                    ) : (
-                                        <div
-                                            onClick={() => {
-                                                navigate("/account");
-                                            }}
+                                ) : (
+                                    <NavLink className={({ isActive }) => (isActive ? `${style.link} ${style.active}` : style.link)} to={"/account"}>
+                                            <div
                                             className={style.icon}>
                                             <img src="/imgs/user.svg" alt="Аккаунт" />
                                         </div>
+                                    </NavLink>
+
                                     )}
                                 </>
                             )}
