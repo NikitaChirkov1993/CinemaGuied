@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { InputAuthProps } from "../../../../types/types";
-import style from "./inputAuth.module.css";
+import style from "./InputAuth.module.css";
 
 const InputRegister: React.FC<InputAuthProps> = ({ img, type, placeholder, auth, setAuth, isName, setErrorMassage, errorMassage }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
